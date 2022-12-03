@@ -1,15 +1,13 @@
 <?php
 namespace App\Http\Controllers;
-use App\Models\LoanService;
-use App\Models\Scheme;
-use App\Models\Document;
-//use App\Models\DocumentType;
-use App\Models\LoanCategory;
-use App\Models\SchemeType;
-use App\Models\OfficerName;
-use App\Models\Relationship;
-use App\Models\Employers;
-
+use App\Models\Qualification;
+use App\Models\Specialization;
+use App\Models\Department;
+use App\Models\Category;
+use App\Models\HospitalCategory;
+use App\Models\Banner;
+use App\Models\District;
+use App\Models\BloodGroup;
 use Session;
 use Carbon;
 use Illuminate\Support\Facades\Validator;
@@ -17,551 +15,532 @@ use Illuminate\Http\Request;
 
 class ConfigurationController extends Controller
 {
-   public function serviceList() {
-        $service=LoanService::get();
-     return view('Configuration/Service/serviceList')->with('service',$service);
-   }
-   public function addService() {
-          return view('Configuration/Service/addService');
-     }
+	//qualification function//
+				public function qualificationList() 
+				{
+					$qualification=Qualification::get();
+					return view('configuration/Qualification/qualificationList')->with('qualification',$qualification);
+				}
+				public function qualificationapi() 
+				{
+					$data=Qualification::get();
+					return response()->json(['data'=>$data]);
+				}
+				
+				public function addQualification() 
+				{
+					return view('configuration/Qualification/addQualification');
+				}
  
   
-   public function submitService(Request $request) {
-        $input=$request->all();
-        $validator = Validator::make($request->all(), [
-                'serviceName' => 'required',
-                 ]);
-          
-                  if ($validator->fails()) {
-                    return redirect()->back()->withErrors($validator)->withInput();
-                            
-                          }
-                          else{
-                                $serviceName=$input['serviceName'];
-                                $serviceCode=$input['serviceCode'];
-                                $serviceDescription=$input['serviceDescription'];
-                                LoanService::insertGetId([
-                                                'serviceName'=>$serviceName,
-                                                'serviceCode'=>$serviceCode,
-                                                'serviceDescription'=>$serviceDescription,
-                                                'created_on'=> date("Y-m-d H:i:s")
-												]);
-                                }
-                        return redirect('/serviceList')->with('message','Success! Your District Updated Successfully'); 
-               
-               
-                        
-    }
-   public function editService($ID) {
-        $service=LoanService::where([['id',$ID]])->first();
-       
-       return view('Configuration/Service/editService')->with('service',$service);
-   }
-   public function updateService(Request $request) {
-        $input=$request->all();
-        $validator = Validator::make($request->all(), [
-               
-          'serviceCode' => 'required|unique:loan_service,serviceCode,'.$input["id"],
-           
-            
-             ]);
-      
-              if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
-                        
-                      }
-                      else{
-                        $id=$input['id'];
-                        $serviceName=$input['serviceName'];
-                        $serviceCode=$input['serviceCode'];
-                        $serviceDescription=$input['serviceDescription'];
-                        LoanService::where('id',$id)->update([
-                                   'serviceName'=>$serviceName,
-                                   'serviceCode'=>$serviceCode,
-                                   'serviceDescription'=>$serviceDescription,
-                                   'created_on'=> date("Y-m-d H:i:s")
-						]);
-                                        return redirect('/serviceList')->with('message','Success! Your District Updated Successfully'); 
-                      }         
-    }
-   public function deleteService($ID)
-   {  
-            LoanService::where('id', $ID)->delete();
-               return redirect()->back()->with('message', 'Material Deleted Successfully');
-     }
-     public function categoryList() {
-          $category=LoanCategory::get();
-       return view('Configuration/Category/categoryList')->with('category',$category);
-     }
-     public function addCategory() {
-            return view('Configuration/Category/addCategory');
-       }
-   
-    
-     public function submitCategory(Request $request) {
-          $input=$request->all();
-          $validator = Validator::make($request->all(), [
-               'loanCode' => 'required|unique:loan_category,loanCode',
-                   ]);
-            
-                    if ($validator->fails()) {
-                      return redirect()->back()->withErrors($validator)->withInput();
-                              
-                            }
-                            else{
-                                  $loanName=$input['loanName'];
-                                  $loanCode=$input['loanCode'];
-                                  $loanDescription=$input['loanDescription'];
-                                  LoanCategory::insertGetId([
-                                                  'loanName'=>$loanName,
-                                                  'loanCode'=>$loanCode,
-                                                  'loanDescription'=>$loanDescription,
-                                                  'created_on'=> date("Y-m-d H:i:s")
-                                                              ]);
-                                  }
-                          return redirect('/categoryList')->with('message','Success! Your District Updated Successfully'); 
-                 
-                 
-                          
-      }
-     public function editCategory($ID) {
-          $category=LoanCategory::where([['id',$ID]])->first();
-         
-         return view('Configuration/Category/editCategory')->with('category',$category);
-     }
-     public function updateCategory(Request $request) {
-          $input=$request->all();
-          $validator = Validator::make($request->all(), [
-            'loanCode' => 'required|unique:loan_category,loanCode,'.$input["id"],
-               ]);
-        
-                if ($validator->fails()) {
-                  return redirect()->back()->withErrors($validator)->withInput();
-                          
-                        }
-                        else{
-                          $id=$input['id'];
-                          $loanName=$input['loanName'];
-                              $loanCode=$input['loanCode'];
-                         $loanDescription=$input['loanDescription'];
-                         LoanCategory::where('id',$id)->update([
-                                     'loanName'=>$loanName,
-                                     'loanCode'=>$loanCode,
-                                     'loanDescription'=>$loanDescription,
-                                     'created_on'=> date("Y-m-d H:i:s")
-                                ]);
-                                          return redirect('/categoryList')->with('message','Success! Your District Updated Successfully'); 
-                        }         
-      }
-     public function deleteCategory($ID)
-     {  
-          LoanCategory::where('id', $ID)->delete();
-                 return redirect()->back()->with('message', 'Material Deleted Successfully');
-       }
-       public function schemeList() {
-          $scheme=Scheme::select('scheme.id as id','schemeName','schemeCode','loanName','tenture','monthlyPaid','interest','totalAmount','interest_value','scheme_type_name')->join('loan_category', 'loan_category.id', '=', 'scheme.loanCategory')->join('scheme_type', 'scheme_type.value', '=', 'scheme.schemeMethod')->get(); ;
-          
-          return view('Configuration/Scheme/schemeList')->with('scheme',$scheme);
-     }
-     public function viewLoanData($ID) {
-          $data=Scheme::where('scheme.id',$ID)->select('scheme.id as id','schemeName','schemeCode','loanName','tenture','monthlyPaid','interest','totalAmount','interest_value','scheme_type_name')->join('loan_category', 'loan_category.id', '=', 'scheme.loanCategory')->join('scheme_type', 'scheme_type.value', '=', 'scheme.schemeMethod')->get(); ;
-          
-          return response()->json($data);
-     }
+				public function submitQualification(Request $request) 
+					{
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+					'qualification_name' => 'required',
+					]);
 
-     public function addScheme() {
-        $loan_category=LoanCategory::get();
-        $scheme_type=SchemeType::get();
-            return view('Configuration/Scheme/addScheme')->with('loan_category',$loan_category)->with('scheme_type',$scheme_type);
-       }
-   
-    
-    public function submitScheme(Request $request) {
-          $input=$request->all();
-        
-          $validator = Validator::make($request->all(), [
-                  'schemeName' => 'required',
-                  'tenture' => 'required',
-                  'interest' => 'required',
-                  'totalAmount' => 'required',
-                  'loanCategory' => 'required|not_in:0',
-                  'schemeMethod' => 'required|not_in:0',
-                   ]);
-            
-                    if ($validator->fails()) {
-                      return redirect()->back()->withErrors($validator)->withInput();
-                              
-                            }
-                            else{
-                               
-                                
-                                   $monthlyPaid = (($input['interest'] /(100 * $input['schemeMethod'])) * $input['totalAmount']) / (1 - pow(1 + $input['interest'] /(100 * $input['schemeMethod']),  (-$input['tenture'])));
-                                   $monthlyPaid =round($monthlyPaid);
-                                   $total =round($monthlyPaid) * $input['tenture'];
-                                   $interest_value= $total-$input['totalAmount'];
-                                  $schemeName=$input['schemeName'];
-                                  $schemeCode=$input['schemeCode'];
-                                  $totalAmount=$input['totalAmount'];
-                                  $loanCategory=$input['loanCategory'];
-                                  $schemeMethod=$input['schemeMethod'];
-                                  $tenture=$input['tenture'];
-                                  $interest=$input['interest'];
-                                  Scheme::insertGetId([
-                                                  'interest_value'=>$interest_value,
-                                                  'monthlyPaid'=>$monthlyPaid,
-                                                  'schemeName'=>$schemeName,
-                                                  'schemeCode'=>$schemeCode,
-                                                  'totalAmount'=>$totalAmount,
-                                                  'tenture'=>$tenture,
-                                                  'interest'=>$input['interest'],
-                                                  'loanCategory'=>$loanCategory,
-                                                  'schemeMethod'=>$schemeMethod,
-                                                  'created_on'=> date("Y-m-d H:i:s"),
-												  'isDelete'=> 0
-                                                              ]);
-                                  }
-                          return redirect('/schemeList')->with('message','Success! Your Scheme Added Successfully'); 
-                 
-                 
-                          
-      }
-     public function editScheme($ID) {
-          $scheme=Scheme::where([['id',$ID]])->first();
-          $loan_category=LoanCategory::get();
-        $scheme_type=SchemeType::get();
-         return view('Configuration/Scheme/editScheme')->with('scheme',$scheme)->with('loan_category',$loan_category)->with('scheme_type',$scheme_type);
-     }
-     public function updateScheme(Request $request) {
-          $input=$request->all();
-          $validator = Validator::make($request->all(), [
-               'schemeName' => 'required',
-               'tenture' => 'required',
-               'interest' => 'required',
-               'loanCategory' => 'required|not_in:0',
-               ]);
-        
-                if ($validator->fails()) {
-                  return redirect()->back()->withErrors($validator)->withInput();
-                          
-                        }
-                        else{
-                          $id=$input['id'];
-//$interest_value=$input['interest']/100;
-//$main_value=$input['totalAmount']+$interest_value;
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
 
-//$total = $input['totalAmount'] * (pow((1 + $input['interest'] / 100),$input['schemeMethod']));
+					}
+					else{
+					$qualification_name=$input['qualification_name'];
+					Qualification::insertGetId([
+					'qualification_name'=>$qualification_name,
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					}
+				return redirect('/qualificationList')->with('message','Success! Your Qualification Added Successfully'); 
 
-//$monthlyPaid=$total/$input['tenture'];
-								$monthlyPaid = (($input['interest'] /(100 * $input['schemeMethod'])) * $input['totalAmount']) / (1 - pow(1 + $input['interest'] /(100 * $input['schemeMethod']),  (-$input['tenture'])));
-								$monthlyPaid =round($monthlyPaid);
-								$total =round($monthlyPaid) * $input['tenture'];
-								$interest_value= $total-$input['totalAmount'];
-                         $schemeName=$input['schemeName'];
-                         $schemeCode=$input['schemeCode'];
-                         $totalAmount=$input['totalAmount'];
-                         $schemeMethod=$input['schemeMethod'];
-                         $tenture=$input['tenture'];
-                         $interest=$input['interest'];
-                         $loanCategory=$input['loanCategory'];
-                          Scheme::where('id',$id)->update([
-                              'interest_value'=>$interest_value,
-                              'monthlyPaid'=>$monthlyPaid,
-                              'schemeName'=>$schemeName,
-                              'schemeCode'=>$schemeCode,
-                              'totalAmount'=>$totalAmount,
-                              'tenture'=>$tenture,
-                              'interest'=>$interest,
-                              'loanCategory'=>$loanCategory,
-                              'schemeMethod'=>$schemeMethod,
-                                ]);
-                                          return redirect('/schemeList')->with('message','Success! Your District Updated Successfully'); 
-                        }         
-      }
-		 public function deleteScheme($ID)
-		{  
-			  Scheme::where('id', $ID)->delete();
-					 return redirect()->back()->with('message', 'Material Deleted Successfully');
-		}
-	  
-	    
-	    public function documentList() {
-          $document=Document::get();
-       return view('Configuration/Document/documentList')->with('document',$document);
-     }
+
+
+				}
+				public function editQualification($ID) 
+				{
+					$qualification=Qualification::where([['id',$ID]])->first();
+
+					return view('configuration/Qualification/editQualification')->with('qualification',$qualification);
+				}
+				public function updateQualification(Request $request) 
+				{
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+
+					'qualification_name' => 'required',
+
+
+					]);
+
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
+
+					}
+					else{
+					$id=$input['id'];
+					$qualification_name=$input['qualification_name'];
+					Qualification::where('id',$id)->update([
+					'qualification_name'=>$qualification_name,
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					return redirect('/qualificationList')->with('message','Success! Your Qualification Updated Successfully'); 
+					}         
+				}
+				public function deleteQualification($ID)
+					{  
+					Qualification::where('id', $ID)->delete();
+					return redirect()->back()->with('message', 'Qualification Deleted Successfully');
+					}
+					
+	//specialization function//
+				public function specializationList() 
+				{
+					$specialization=Specialization::get();
+					return view('configuration/Specialization/specializationList')->with('specialization',$specialization);
+				}
+				
+				public function addSpecialization() 
+				{
+					return view('configuration/Specialization/addSpecialization');
+				}
+ 
+  
+				public function submitSpecialization(Request $request) 
+					{
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+					'specialization_name' => 'required',
+					]);
+
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
+
+					}
+					else{
+					$specialization_name=$input['specialization_name'];
+					Specialization::insertGetId([
+					'specialization_name'=>$specialization_name,
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					}
+				return redirect('/specializationList')->with('message','Success! Your Specialization Added Successfully'); 
+
+
+
+				}
+				public function editSpecialization($ID) 
+				{
+					$specialization=Specialization::where([['id',$ID]])->first();
+
+					return view('configuration/Specialization/editSpecialization')->with('specialization',$specialization);
+				}
+				public function updateSpecialization(Request $request) 
+				{
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+
+					'specialization_name' => 'required',
+
+
+					]);
+
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
+
+					}
+					else{
+					$id=$input['id'];
+					$specialization_name=$input['specialization_name'];
+					Specialization::where('id',$id)->update([
+					'specialization_name'=>$specialization_name,
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					return redirect('/specializationList')->with('message','Success! Your Specialization Updated Successfully'); 
+					}         
+				}
+				public function deleteSpecialization($ID)
+					{  
+					Specialization::where('id', $ID)->delete();
+					return redirect()->back()->with('message', 'Specialization Deleted Successfully');
+					}
+	 
+	 //department function//
+	 
+	  public function departmentList() 
+				{
+					$department=Department::get();
+					return view('configuration/Department/departmentList')->with('department',$department);
+				}
+				
+				public function addDepartment() 
+				{
+					return view('configuration/Department/addDepartment');
+				}
+ 
+  
+				public function submitDepartment(Request $request) 
+					{
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+					'department_name' => 'required',
+					]);
+
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
+
+					}
+					else{
+					$department_name=$input['department_name'];
+					Department::insertGetId([
+					'department_name'=>$department_name,
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					}
+				return redirect('/departmentList')->with('message','Success! Your Department Added Successfully'); 
+
+
+
+				}
+				public function editDepartment($ID) 
+				{
+					$department=Department::where([['id',$ID]])->first();
+
+					return view('configuration/Department/editDepartment')->with('department',$department);
+				}
+				public function updateDepartment(Request $request) 
+				{
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+
+					'department_name' => 'required',
+
+
+					]);
+
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
+
+					}
+					else{
+					$id=$input['id'];
+					$department_name=$input['department_name'];
+					Department::where('id',$id)->update([
+					'department_name'=>$department_name,
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					return redirect('/departmentList')->with('message','Success! Your Department Updated Successfully'); 
+					}         
+				}
+				public function deleteDepartment($ID)
+					{  
+					Department::where('id', $ID)->delete();
+					return redirect()->back()->with('message', 'Department Deleted Successfully');
+					}
+
+
+
+  //category function//
+  
+   public function categoryList() 
+				{
+					$category=Category::get();
+					return view('configuration/Category/categoryList')->with('category',$category);
+				}
+				
+				public function addCategory() 
+				{
+					return view('configuration/Category/addCategory');
+				}
+ 
+  
+				public function submitCategory(Request $request) 
+					{
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+					'category_name' => 'required',
+					]);
+
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
+
+					}
+					else{
+					$category_name=$input['category_name'];
+					Category::insertGetId([
+					'category_name'=>$category_name,
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					}
+				return redirect('/categoryList')->with('message','Success! Your Category Added Successfully'); 
+
+
+
+				}
+				public function editCategory($ID) 
+				{
+					$category=Category::where([['id',$ID]])->first();
+
+					return view('configuration/Category/editCategory')->with('category',$category);
+				}
+				public function updateCategory(Request $request) 
+				{
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+
+					'category_name' => 'required',
+
+
+					]);
+
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
+
+					}
+					else{
+					$id=$input['id'];
+					$category_name=$input['category_name'];
+					Category::where('id',$id)->update([
+					'category_name'=>$category_name,
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					return redirect('/categoryList')->with('message','Success! Your Category Updated Successfully'); 
+					}         
+				}
+				public function deleteCategory($ID)
+					{  
+					Category::where('id', $ID)->delete();
+					return redirect()->back()->with('message', 'Category Deleted Successfully');
+					}
+
+
+
+//hospitalCategory//
+
+ public function hospitalCategoryList() 
+				{
+					$hospital_category=HospitalCategory::get();
+					return view('configuration/HospitalCategory/hospitalCategoryList')->with('hospital_category',$hospital_category);
+				}
+				
+				public function addHospitalCategory() 
+				{
+					return view('configuration/HospitalCategory/addHospitalCategory');
+				}
+ 
+  
+				public function submitHospitalCategory(Request $request) 
+					{
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+					'hospital_category_name' => 'required',
+					]);
+
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
+
+					}
+					else{
+					$hospital_category_name=$input['hospital_category_name'];
+					$hospital_category_description=$input['hospital_category_description'];
+					$hospital_category_image=$input['hospital_category_image'];
+					HospitalCategory::insertGetId([
+					'hospital_category_name'=>$hospital_category_name,
+					'hospital_category_description'=>$hospital_category_description,
+					'hospital_category_image'=>$hospital_category_image,
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					}
+				return redirect('/hospitalCategoryList')->with('message','Success! Your HospitalCategory Added Successfully'); 
+
+
+
+				}
+				public function editHospitalCatogory($ID) 
+				{
+					$hospital_category=HospitalCategory::where([['id',$ID]])->first();
+
+					return view('configuration/HospitalCategory/editHospitalCatogory')->with('hospital_category',$hospital_category);
+				}
+				public function updateHospitalCategory(Request $request) 
+				{
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+
+					'hospital_category_name' => 'required',
+
+
+					]);
+
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
+
+					}
+					else{
+					$id=$input['id'];
+					$hospital_category_name=$input['hospital_category_name'];
+					$hospital_category_description=$input['hospital_category_name'];
+					$hospital_category_image=$input['hospital_category_name'];
+					HospitalCategory::where('id',$id)->update([
+					'hospital_category_name'=>$hospital_category_name,
+					'hospital_category_name'=>$hospital_category_description,
+					'hospital_category_name'=>$hospital_category_image,
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					return redirect('/hospitalCategoryList')->with('message','Success! Your Hospital Category Updated Successfully'); 
+					}         
+				}
+				public function deleteHospitalCategory($ID)
+					{  
+					HospitalCategory::where('id', $ID)->delete();
+					return redirect()->back()->with('message', 'Hospital Category Deleted Successfully');
+					}
+					
+//banner function//
+					public function bannerList() 
+				{
+					$banner=Banner::get();
+					return view('configuration/Banner/bannerList')->with('banner',$banner);
+				}
+				
+				public function addBanner() 
+				{
+					return view('configuration/Banner/addBanner');
+				}
+ 
+  
+				public function submitBanner(Request $request) 
+					{
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+					'banner_name' => 'required',
+					]);
+
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
+
+					}
+					else{
+					$banner_name=$input['banner_name'];
+					Banner::insertGetId([
+					'banner_name'=>$banner_name,
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					}
+				return redirect('/bannerList')->with('message','Success! Your Banner Added Successfully'); 
+
+
+
+				}
+				public function editBanner($ID) 
+				{
+					$banner=Banner::where([['id',$ID]])->first();
+
+					return view('configuration/Banner/editBanner')->with('banner',$banner);
+				}
+				public function updateBanner(Request $request) 
+				{
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+
+					'banner_name' => 'required',
+
+
+					]);
+
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
+
+					}
+					else{
+					$id=$input['id'];
+					$banner_name=$input['banner_name'];
+					Banner::where('id',$id)->update([
+					'banner_name'=>$banner_name,
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					return redirect('/bannerList')->with('message','Success! Your Banner Updated Successfully'); 
+					}         
+				}
+				public function deleteBanner($ID)
+					{  
+					Banner::where('id', $ID)->delete();
+					return redirect()->back()->with('message', 'Banner Deleted Successfully');
+					}
+	//bloodgroup//
 	
-	  public function addDocument() {
-			
-			
-            return view('Configuration/Document/addDocument');
-       }
-   
-   
-    
-     public function submitDocument(Request $request) {
-          $input=$request->all();
-          $validator = Validator::make($request->all(), [
-                  'documentName' => 'required',
-                  'documentSize' => 'required',
-                   ]);
-            
-                    if ($validator->fails()) {
-                      return redirect()->back()->withErrors($validator)->withInput();
-                              
-                            }
-                            else{
-                               
-                                  
-                                  $documentName=$input['documentName'];
-                                  $documentExtension=$input['documentExtension'];
-                                  $documentSize=$input['documentSize'];
-                                  Document::insertGetId([
-                                                  'documentName'=>$documentName,
-                                                  'documentExtension'=>$documentExtension,
-                                                  'documentSize'=>$documentSize,
-                                                  'created_on'=> date("Y-m-d H:i:s")
-                                                              ]);
-                                  }
-                          return redirect('/documentList')->with('message','Success! Your Document Updated Successfully'); 
-                 
-                 
-                          
-      }
-     public function editDocument($ID) {
-          $document=Document::where([['id',$ID]])->first();
-         
-         return view('Configuration/Document/editDocument')->with('document',$document);
-     }
-     public function updateDocument(Request $request) {
-          $input=$request->all();
-          $validator = Validator::make($request->all(), [
-            'documentName' => 'required',
-               ]);
-        
-                if ($validator->fails()) {
-                  return redirect()->back()->withErrors($validator)->withInput();
-                          
-                        }
-                        else{
-                          $id=$input['id'];
-                          $documentName=$input['documentName'];
-                              $documentExtension=$input['documentExtension'];
-                         $documentSize=$input['documentSize'];
-                         Document::where('id',$id)->update([
-                                     'documentName'=>$documentName,
-                                     'documentExtension'=>$documentExtension,
-                                     'documentSize'=>$documentSize,
-                                     'created_on'=> date("Y-m-d H:i:s")
-                                ]);
-                                          return redirect('/documentList')->with('message','Success! Your Document Updated Successfully'); 
-                        }         
-      }
-     public function deleteDocument($ID)
-     {  
-          Document::where('id', $ID)->delete();
-                 return redirect()->back()->with('message', 'Document Deleted Successfully');
-       }
-	   
-       
-      public function officerList()
-	  {
-        $officername=OfficerName::get();
-     return view('Configuration/Officer/officerList')->with('officername',$officername);
-   }
-   public function addOfficer() {
-          return view('Configuration/Officer/addOfficer');
-     }
+	public function blood_groupList() 
+				{
+					$blood_group=BloodGroup::get();
+					return view('configuration/BloodGroup/blood_groupList')->with('blood_group',$blood_group);
+				}
+				
+				public function addBloodGroup() 
+				{
+					return view('configuration/BloodGroup/addBloodGroup');
+				}
  
   
-   public function submitOfficer(Request $request) {
-        $input=$request->all();
-        $validator = Validator::make($request->all(), [
-                'OfficerName' => 'required',
-                 ]);
-          
-                  if ($validator->fails()) {
-                    return redirect()->back()->withErrors($validator)->withInput();
-                            
-                          }
-                          else{
-                                $OfficerName=$input['OfficerName'];
-                                OfficerName::insertGetId([
-                                                'OfficerName'=>$OfficerName,
-                                                'created_on'=> date("Y-m-d H:i:s")
-												]);
-                                }
-                        return redirect('/officerList')->with('message','Success! Your Officer Added Successfully'); 
-               
-               
-                        
-    }
-   public function editOfficer($ID) {
-        $officername=OfficerName::where([['id',$ID]])->first();
-       
-       return view('Configuration/Officer/editOfficer')->with('officername',$officername);
-   }
-   public function updateOfficer(Request $request) {
-        $input=$request->all();
-        $validator = Validator::make($request->all(), [
-               
-           
-            
-             ]);
-      
-              if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
-                        
-                      }
-                      else{
-                        $id=$input['id'];
-                        $OfficerName=$input['OfficerName'];
-                        OfficerName::where('id',$id)->update([
-                                   'OfficerName'=>$OfficerName,
-                                   'created_on'=> date("Y-m-d H:i:s")
-						]);
-                                        return redirect('/officerList')->with('message','Success! Your District Updated Successfully'); 
-                      }         
-    }
-   public function deleteOfficer($ID)
-   {  
-            OfficerName::where('id', $ID)->delete();
-               return redirect()->back()->with('message', 'Material Deleted Successfully');
-     } 
-	 
-	 
-	   
-       
-      public function relationshipList()
-	  {
-        $relationship=Relationship::get();
-     return view('Configuration/Relationship/relationshipList')->with('relationship',$relationship);
-   }
-   public function addRelationship() {
-          return view('Configuration/Relationship/addRelationship');
-     }
- 
-  
-   public function submitRelationship(Request $request) {
-        $input=$request->all();
-        $validator = Validator::make($request->all(), [
-                'RelationshipName' => 'required',
-                 ]);
-          
-                  if ($validator->fails()) {
-                    return redirect()->back()->withErrors($validator)->withInput();
-                            
-                          }
-                          else{
-                                $RelationshipName=$input['RelationshipName'];
-                                Relationship::insertGetId([
-                                                'RelationshipName'=>$RelationshipName,
-                                                'created_on'=> date("Y-m-d H:i:s")
-												]);
-                                }
-                        return redirect('/relationshipList')->with('message','Success! Your Relationship Added Successfully'); 
-               
-               
-                        
-    }
-   public function editRelationship($ID) {
-        $relationship=Relationship::where([['id',$ID]])->first();
-       
-       return view('Configuration/Relationship/editRelationship')->with('relationship',$relationship);
-   }
-   public function updateRelationship(Request $request) {
-        $input=$request->all();
-        $validator = Validator::make($request->all(), [
-               
-           
-            
-             ]);
-      
-              if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
-                        
-                      }
-                      else{
-                        $id=$input['id'];
-                        $RelationshipName=$input['RelationshipName'];
-                        Relationship::where('id',$id)->update([
-                                   'RelationshipName'=>$RelationshipName,
-                                   'created_on'=> date("Y-m-d H:i:s")
-						]);
-                                        return redirect('/relationshipList')->with('message','Success! Your District Updated Successfully'); 
-                      }         
-    }
-   public function deleteRelationship($ID)
-   {  
-            Relationship::where('id', $ID)->delete();
-               return redirect()->back()->with('message', 'Material Deleted Successfully');
-     } 
-	 
-	 
-	 
-	   
-      public function employersList()
-	  {
-        $employers=Employers::get();
-     return view('Configuration/Employer/employersList')->with('employers',$employers);
-   }
-   public function addEmployers() {
-          return view('Configuration/Employer/addEmployers');
-     }
- 
-  
-   public function submitEmployers(Request $request) {
-        $input=$request->all();
-        $validator = Validator::make($request->all(), [
-                'EmployerName' => 'required',
-                 ]);
-          
-                  if ($validator->fails()) {
-                    return redirect()->back()->withErrors($validator)->withInput();
-                            
-                          }
-                          else{
-                                $EmployerName=$input['EmployerName'];
-                                Employers::insertGetId([
-                                                'EmployerName'=>$EmployerName,
-                                                'created_on'=> date("Y-m-d H:i:s")
-												]);
-                                }
-                        return redirect('/employersList')->with('message','Success! Your Employer Added Successfully'); 
-               
-               
-                        
-    }
-   public function editEmployers($ID) {
-        $employers=Employers::where([['id',$ID]])->first();
-       
-       return view('Configuration/Employer/editEmployers')->with('employers',$employers);
-   }
-   public function updateEmployers(Request $request) {
-        $input=$request->all();
-        $validator = Validator::make($request->all(), [
-               
-           
-            
-             ]);
-      
-              if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
-                        
-                      }
-                      else{
-                        $id=$input['id'];
-                        $EmployerName=$input['EmployerName'];
-                        Employers::where('id',$id)->update([
-                                   'EmployerName'=>$EmployerName,
-                                   'created_on'=> date("Y-m-d H:i:s")
-						]);
-                                        return redirect('/employersList')->with('message','Success! Your Employer Updated Successfully'); 
-                      }         
-    }
-   public function deleteEmployers($ID)
-   {  
-            Employers::where('id', $ID)->delete();
-               return redirect()->back()->with('message', 'Material Deleted Successfully');
-     } 
-	 
-	 
-}
+				public function submitBloodGroup(Request $request) 
+					{
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+					'blood_group_name'=>'required',
+					]);
+
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
+
+					}
+					else{
+					$blood_group_name=$input['blood_group_name'];
+					$blood_group_description=$input['blood_group_description'];
+					BloodGroup::insertGetId([
+					'blood_group_name'=>$blood_group_name,
+					'blood_group_description'=>$blood_group_description,
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					}
+				return redirect('/blood_groupList')->with('message','Success! Your BloodGroup Added Successfully'); 
+
+
+
+				}
+				public function editBloodGroup($ID) 
+				{
+					$blood_group=BloodGroup::where([['id',$ID]])->first();
+
+					return view('configuration/BloodGroup/editBloodGroup')->with('blood_group',$blood_group);
+				}
+				public function updateBloodGroup(Request $request) 
+				{
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+
+					'blood_group_name' => 'required',
+
+
+					]);
+
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
+
+					}
+					else{
+					$id=$input['id'];
+					$blood_group_name=$input['blood_group_name'];
+					$blood_group_description=$input['blood_group_description'];
+					BloodGroup::where('id',$id)->update([
+					'blood_group_name'=>$blood_group_name,
+					'blood_group_description'=>$blood_group_description,
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					return redirect('/blood_groupList')->with('message','Success! Your BloodGroup Updated Successfully'); 
+					}         
+				}
+				public function deleteBloodGroup($ID)
+					{  
+					BloodGroup::where('id', $ID)->delete();
+					return redirect()->back()->with('message', 'BloodGroup Deleted Successfully');
+					}
+	
+}						

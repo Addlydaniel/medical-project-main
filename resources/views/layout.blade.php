@@ -1,37 +1,34 @@
 <!doctype html>
 <html lang="en">
+   
+<!-- Mirrored from templates.iqonic.design/xray/html/dashboard-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 26 Oct 2022 05:50:30 GMT -->
 <head>
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Medical Apps</title>
+      <title>Medical App</title>
       <!-- Favicon -->
       <link rel="shortcut icon" href="images/favicon.ico" />
       <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+      <link rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}">
       <!-- Typography CSS -->
-      <link rel="stylesheet" href="assets/css/typography.css">
+      <link rel="stylesheet" href="{{ url('css/typography.css') }}">
       <!-- Style CSS -->
-      <link rel="stylesheet" href="assets/css/style.css">
+      <link rel="stylesheet" href="{{ url('css/style.css') }}">
       <!-- Responsive CSS -->
-      <link rel="stylesheet" href="assets/css/responsive.css">
+      <link rel="stylesheet" href="{{ url('css/responsive.css') }}">
        <!-- Full calendar -->
-      <link href='assets/fullcalendar/core/main.css' rel='stylesheet' />
-      <link href='assets/fullcalendar/daygrid/main.css' rel='stylesheet' />
-      <link href='assets/fullcalendar/timegrid/main.css' rel='stylesheet' />
-      <link href='assets/fullcalendar/list/main.css' rel='stylesheet' />
+      <link href="{{ url('fullcalendar/core/main.css') }}" rel='stylesheet' />
+      <link href="{{ url('fullcalendar/daygrid/main.css') }}" rel='stylesheet' />
+      <link href="{{ url('fullcalendar/timegrid/main.css') }}" rel='stylesheet' />
+      <link href="{{ url('fullcalendar/list/main.css') }}" rel='stylesheet'/>
 
-      <link rel="stylesheet" href="../../../cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+      <link rel="stylesheet" href="{{ url('assets/flatpickr/dist/flatpickr.min.css') }}">
 
 
    </head>
    <body>
-      <!-- loader Start -->
-      <div id="loading">
-         <div id="loading-center">
-
-         </div>
-      </div>
+    
       <!-- loader END -->
       <!-- Wrapper Start -->
       <div class="wrapper">
@@ -54,32 +51,63 @@
             <div id="sidebar-scrollbar">
                <nav class="iq-sidebar-menu">
                   <ul id="iq-sidebar-toggle" class="iq-menu">
-                     <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Dashboard</span></li>
-                     <li>
-                        <a href="#" class="iq-waves-effect"><i class="ri-hospital-fill"></i><span>Doctor Dashboard</span></a>
-						
-                     </li>                     
-                     <li class="active">
-                        <a href="#" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>Hospital Dashboard</span></a>
-                     </li>
-                     
+                     <li class="iq-menu-title"><i class="ri-subtract-line"></i>  <a href="{{url('dashboard')}}" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><span>Dashboard</a></span></li>
+                     <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Users</span></li>
                     
-                     
                      <li>
-                        <a href="#doctor-info" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-user-3-fill"></i><span>Doctors</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="doctor-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <!--<li><a href="doctor-list.html"><i class="ri-file-list-fill"></i>All Doctors</a></li>-->
-                           <li  class="{{ (request()->is('/adddoctor')) ? 'mm-active' : '' }}">
-						   <a href="{{ url('/adddoctor') }}"><i class="ri-user-add-fill"></i>Add Doctor</a></li>
-						  
-                           <li><a href="profile.html"><i class="ri-profile-fill"></i>Doctor Profile</a></li>
-                           <li><a href="profile-edit.html"><i class="ri-file-edit-fill"></i>Edit Doctor</a></li>
-                        </ul>
+                        <a href="{{url('userList')}}" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-home-4-fill"></i><span>Users</span></a>
+                       
                      </li>
+                     <li>
+                        <a href="{{url('addUser')}}" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-user-4-fill"></i><span>Add User</span></a>
+                       
+                     </li>
+                     <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Hospital</span></li>
+                    
+                     <li>
+                        <a href="{{url('hospitalDashboard')}}" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-home-4-fill"></i><span>Hospital Dashboard</span></a>
+                       
+                     </li>
+                    <!-- <li>
+                        <a href="{{url('addHospital')}}" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-chat-4-fill"></i><span>Add Hospital</span></a>
+                       
+                     </li>-->
+
+                     <li>
+                        <a href="{{url('hospitalList')}}" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-briefcase-4-fill"></i><span>All Hospital</span></a>
+                       
+                     </li>
+                     <li>
+                        <a href="{{url('doctorList')}}" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-user-3-fill"></i><span>Doctors</span></a>
+                       
+                     </li>
+                     <li>
+                        <a href="{{url('addDoctor')}}" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-user-3-fill"></i><span>Add Doctor</span></a>
+                       
+                     </li>
+                    
+                    
+                     <li><a href="{{url('addSchedule')}}" class="iq-waves-effect"><i class="ri-calendar-event-fill"></i><span>Schedules</span></a></li>
+                    
                    
-                   
-                   
-                   
+                     
+                     <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Reports</span></li>
+                     <li><a href="calendar.html" class="iq-waves-effect"><i class="ri-apps-fill"></i><span>Hospital Report</span></a></li>
+                     <li><a href="calendar.html" class="iq-waves-effect"><i class="ri-record-circle-line"></i><span>Token Report</span></a></li>
+                     <li><a href="calendar.html" class="iq-waves-effect"><i class="ri-file-chart-fill"></i><span>Action Log</span></a></li>
+                     <li><a href="calendar.html" class="iq-waves-effect"><i class="ri-bar-chart-fill"></i><span>User Report</span></a></li>
+                        
+                     <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Configuration</span></li>
+                     <li><a href="{{url('qualificationList')}}" class="iq-waves-effect"><i class="ion-heart"></i><span>Qualification</span></a></li>
+                     <li><a href="{{url('specializationList')}}" class="iq-waves-effect"><i class="ion-heart"></i><span>Specialization</span></a></li>
+                     <li><a href="{{url('categoryList')}}" class="iq-waves-effect"><i class="ion-heart"></i><span>Category</span></a></li>
+                     <li><a href="{{url('hospitalCategoryList')}}" class="iq-waves-effect"><i class="ion-heart"></i><span>Hospital Category</span></a></li>
+                     <li><a href="{{url('departmentList')}}" class="iq-waves-effect"><i class="ion-heart"></i><span>Hospital Department</span></a></li>
+                     <li><a href="{{url('bannerList')}}" class="iq-waves-effect"><i class="ion-heart"></i><span>Banner</span></a></li>
+			        <li><a href="{{url('districtList')}}" class="iq-waves-effect"><i class="ion-heart"></i><span>District</span></a></li>
+			        <li><a href="{{url('blood_groupList')}}" class="iq-waves-effect"><i class="ion-heart"></i><span>BloodGroup</span></a></li>
+
+                    
                     
                   </ul>
                </nav>
@@ -118,84 +146,8 @@
                   </div>
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                      <ul class="navbar-nav ml-auto navbar-list">
-                        <li class="nav-item">
-                           <a class="search-toggle iq-waves-effect language-title" href="#"><img src="images/small/flag-01.png" alt="img-flaf" class="img-fluid mr-1" style="height: 16px; width: 16px;" /> English <i class="ri-arrow-down-s-line"></i></a>
-                           <div class="iq-sub-dropdown">
-                              <a class="iq-sub-card" href="#"><img src="images/small/flag-02.png" alt="img-flaf" class="img-fluid mr-2" />French</a>
-                              <a class="iq-sub-card" href="#"><img src="images/small/flag-03.png" alt="img-flaf" class="img-fluid mr-2" />Spanish</a>
-                              <a class="iq-sub-card" href="#"><img src="images/small/flag-04.png" alt="img-flaf" class="img-fluid mr-2" />Italian</a>
-                              <a class="iq-sub-card" href="#"><img src="images/small/flag-05.png" alt="img-flaf" class="img-fluid mr-2" />German</a>
-                              <a class="iq-sub-card" href="#"><img src="images/small/flag-06.png" alt="img-flaf" class="img-fluid mr-2" />Japanese</a>
-
-                           </div>
-                        </li>
-                        <li class="nav-item iq-full-screen">
-                           <a href="#" class="iq-waves-effect" id="btnFullscreen"><i class="ri-fullscreen-line"></i></a>
-                        </li>
-                        <li class="nav-item">
-                           <a href="#" class="search-toggle iq-waves-effect">
-                                 <i class="ri-notification-3-fill"></i>
-                                 <span class="bg-danger dots"></span>
-                              </a>
-                           <div class="iq-sub-dropdown">
-                              <div class="iq-card shadow-none m-0">
-                                 <div class="iq-card-body p-0 ">
-                                    <div class="bg-primary p-3">
-                                       <h5 class="mb-0 text-white">All Notifications<small class="badge  badge-light float-right pt-1">4</small></h5>
-                                    </div>
-
-                                    <a href="#" class="iq-sub-card" >
-                                       <div class="media align-items-center">
-                                          <div class="">
-                                             <img class="avatar-40 rounded" src="images/user/01.jpg" alt="">
-                                          </div>
-                                          <div class="media-body ml-3">
-                                             <h6 class="mb-0 ">Emma Watson Bini</h6>
-                                             <small class="float-right font-size-12">Just Now</small>
-                                             <p class="mb-0">95 MB</p>
-                                          </div>
-                                       </div>
-                                    </a>
-                                    <a href="#" class="iq-sub-card" >
-                                       <div class="media align-items-center">
-                                          <div class="">
-                                             <img class="avatar-40 rounded" src="images/user/02.jpg" alt="">
-                                          </div>
-                                          <div class="media-body ml-3">
-                                             <h6 class="mb-0 ">New customer is join</h6>
-                                             <small class="float-right font-size-12">5 days ago</small>
-                                             <p class="mb-0">Jond Bini</p>
-                                          </div>
-                                       </div>
-                                    </a>
-                                    <a href="#" class="iq-sub-card" >
-                                       <div class="media align-items-center">
-                                          <div class="">
-                                             <img class="avatar-40 rounded" src="images/user/03.jpg" alt="">
-                                          </div>
-                                          <div class="media-body ml-3">
-                                             <h6 class="mb-0 ">Two customer is left</h6>
-                                             <small class="float-right font-size-12">2 days ago</small>
-                                             <p class="mb-0">Jond Bini</p>
-                                          </div>
-                                       </div>
-                                    </a>
-                                    <a href="#" class="iq-sub-card" >
-                                       <div class="media align-items-center">
-                                          <div class="">
-                                             <img class="avatar-40 rounded" src="images/user/04.jpg" alt="">
-                                          </div>
-                                          <div class="media-body ml-3">
-                                             <h6 class="mb-0 ">New Mail from Fenny</h6>
-                                             <small class="float-right font-size-12">3 days ago</small>
-                                             <p class="mb-0">Jond Bini</p>
-                                          </div>
-                                       </div>
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                        </li>
+                        
+                        
                         <li class="nav-item dropdown">
                            <a href="#" class="search-toggle iq-waves-effect">
                               <i class="ri-mail-open-fill"></i>
@@ -290,7 +242,7 @@
                                           <i class="ri-file-user-line"></i>
                                        </div>
                                        <div class="media-body ml-3">
-                                          <h6 class="mb-0">My Profile</h6>
+                                          <h6 class="mb-0 ">My Profile</h6>
                                           <p class="mb-0 font-size-12">View personal profile details.</p>
                                        </div>
                                     </div>
@@ -301,7 +253,7 @@
                                           <i class="ri-profile-line"></i>
                                        </div>
                                        <div class="media-body ml-3">
-                                          <h6 class="mb-0">Edit Profile</h6>
+                                          <h6 class="mb-0 ">Edit Profile</h6>
                                           <p class="mb-0 font-size-12">Modify your personal details.</p>
                                        </div>
                                     </div>
@@ -340,601 +292,101 @@
 
             </div>
          </div>
-         <!-- TOP Nav Bar END -->
-            <div class="container-fluid">
-               <div class="row">
-                  <div class="col-lg-12">
-                     <div class="row">
-                        <div class="col-md-6 col-lg-3">
-                           <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-                              <div class="iq-card-body iq-bg-primary rounded">
-                                 <div class="d-flex align-items-center justify-content-between">
-                                    <div class="rounded-circle iq-card-icon bg-primary"><i class="ri-user-fill"></i></div>
-                                    <div class="text-right">                                 
-                                       <h2 class="mb-0"><span class="counter">5600</span></h2>
-                                       <h5 class="">Doctors</h5>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                           <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-                              <div class="iq-card-body iq-bg-warning rounded">
-                                 <div class="d-flex align-items-center justify-content-between">
-                                    <div class="rounded-circle iq-card-icon bg-warning"><i class="ri-women-fill"></i></div>
-                                    <div class="text-right">                                 
-                                       <h2 class="mb-0"><span class="counter">3450</span></h2>
-                                       <h5 class="">Nurses</h5>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                           <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-                              <div class="iq-card-body iq-bg-danger rounded">
-                                 <div class="d-flex align-items-center justify-content-between">
-                                    <div class="rounded-circle iq-card-icon bg-danger"><i class="ri-group-fill"></i></div>
-                                    <div class="text-right">                                 
-                                       <h2 class="mb-0"><span class="counter">3500</span></h2>
-                                       <h5 class="">Patients</h5>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                           <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-                              <div class="iq-card-body iq-bg-info rounded">
-                                 <div class="d-flex align-items-center justify-content-between">
-                                    <div class="rounded-circle iq-card-icon bg-info"><i class="ri-hospital-line"></i></div>
-                                    <div class="text-right">                                 
-                                       <h2 class="mb-0"><span class="counter">4500</span></h2>
-                                       <h5 class="">Pharmacists</h5>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                 <div class="col-sm-12">
-                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-                     <div class="iq-card-header d-flex justify-content-between">
-                        <div class="iq-header-title">
-                           <h4 class="card-title">Hospital Survey</h4>
-                        </div>
-                     </div>
-                       <div class="iq-card-body pb-0 mt-3">
-                          <div class="row text-center">
-                               <div class="col-sm-3 col-6">
-                                   <h4 class="margin-0">$ 305 </h4>
-                                   <p class="text-muted"> Today's Income</p>
-                               </div>
-                               <div class="col-sm-3 col-6">
-                                   <h4 class="margin-0">$ 999 </h4>
-                                   <p class="text-muted">This Week's Income</p>
-                               </div>
-                               <div class="col-sm-3 col-6">
-                                   <h4 class="margin-0">$ 4999 </h4>
-                                   <p class="text-muted">This Month's Income</p>
-                               </div>
-                               <div class="col-sm-3 col-6">
-                                   <h4 class="margin-0">$ 90,000 </h4>
-                                   <p class="text-muted">This Year's Income</p>
-                               </div>
-                           </div>
-                       </div>
-                        <div id="home-servey-chart"></div>
-                    </div>
-                  </div>
-                  <div class="col-sm-12">
-                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-                        <div class="iq-card-header d-flex justify-content-between">
-                           <div class="iq-header-title">
-                              <h4 class="card-title">Hospital Staff</h4>
-                           </div>
-                        </div>
-                        <div class="iq-card-body">
-                           <ul id="doster-list-slide" class="d-flex flex-wrap align-items-center p-0">
-                              <li class="doctor-list-item col-md-3 text-center p-2">
-                                 <div class="doctor-list-item-inner rounded">
-                                    <div class="donter-profile">
-                                       <img src="images/user/05.jpg" class="img-fluid rounded-circle" alt="user-img">
-                                    </div>
-                                    <div class="doctor-detail mt-3">
-                                       <h5>Dr. Paul Molive</h5>
-                                       <h6>Doctor</h6>
-                                    </div>
-                                    <hr>
-                                    <div class="doctor-description">
-                                       <p class="mb-0 text-center pl-2 pr-2">California Hospital Medical Center</p>
-                                    </div>
-                                 </div>
-                              </li>
-                              <li class="doctor-list-item col-md-3 text-center p-2">
-                                 <div class="doctor-list-item-inner rounded">
-                                    <div class="donter-profile">
-                                       <img src="images/user/06.jpg" class="img-fluid rounded-circle" alt="user-img">
-                                    </div>
-                                    <div class="doctor-detail mt-3">
-                                       <h5>Dr. Paul Molive</h5>
-                                       <h6>Nurse</h6>
-                                    </div>
-                                    <hr>
-                                    <div class="doctor-description">
-                                       <p class="mb-0 text-center pl-2 pr-2">California Hospital Medical Center</p>
-                                    </div>
-                                 </div>
-                              </li>
-                              <li class="doctor-list-item col-md-3 text-center p-2">
-                                 <div class="doctor-list-item-inner rounded">
-                                    <div class="donter-profile">
-                                       <img src="images/user/07.jpg" class="img-fluid rounded-circle" alt="user-img">
-                                    </div>
-                                    <div class="doctor-detail mt-3">
-                                       <h5>Dr. Paul Molive</h5>
-                                       <h6>Surgeon</h6>
-                                    </div>
-                                    <hr>
-                                    <div class="doctor-description">
-                                       <p class="mb-0 text-center pl-2 pr-2">California Hospital Medical Center</p>
-                                    </div>
-                                 </div>
-                              </li>
-                              <li class="doctor-list-item col-md-3 text-center p-2">
-                                 <div class="doctor-list-item-inner rounded">
-                                    <div class="donter-profile">
-                                       <img src="images/user/08.jpg" class="img-fluid rounded-circle" alt="user-img">
-                                    </div>
-                                    <div class="doctor-detail mt-3">
-                                       <h5>Dr. Paul Molive</h5>
-                                       <h6>Doctor</h6>
-                                    </div>
-                                    <hr>
-                                    <div class="doctor-description">
-                                       <p class="mb-0 text-center pl-2 pr-2">California Hospital Medical Center</p>
-                                    </div>
-                                 </div>
-                              </li>
-                              <li class="doctor-list-item col-md-3 text-center p-2">
-                                 <div class="doctor-list-item-inner rounded">
-                                    <div class="donter-profile">
-                                       <img src="images/user/09.jpg" class="img-fluid rounded-circle" alt="user-img">
-                                    </div>
-                                    <div class="doctor-detail mt-3">
-                                       <h5>Dr. Paul Molive</h5>
-                                       <h6>Surgeon</h6>
-                                    </div>
-                                    <hr>
-                                    <div class="doctor-description">
-                                       <p class="mb-0 text-center pl-2 pr-2">California Hospital Medical Center</p>
-                                    </div>
-                                 </div>
-                              </li>
-                              <li class="doctor-list-item col-md-3 text-center p-2">
-                                 <div class="doctor-list-item-inner rounded">
-                                    <div class="donter-profile">
-                                       <img src="images/user/10.jpg" class="img-fluid rounded-circle" alt="user-img">
-                                    </div>
-                                    <div class="doctor-detail mt-3">
-                                       <h5>Dr. Paul Molive</h5>
-                                       <h6>OT Assistent</h6>
-                                    </div>
-                                    <hr>
-                                    <div class="doctor-description">
-                                       <p class="mb-0 text-center pl-2 pr-2">California Hospital Medical Center</p>
-                                    </div>
-                                 </div>
-                              </li>
-                           </ul>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-12 col-lg-8">
-                     <div class="row">
-                        <div class="col-sm-12">
-                         <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-                           <div class="iq-card-header d-flex justify-content-between">
-                              <div class="iq-header-title">
-                                 <h4 class="card-title">Operations</h4>
-                              </div>
-                              <div class="iq-card-header-toolbar d-flex align-items-center">
-                                 <div class="dropdown">
-                                    <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
-                                    <i class="ri-more-fill"></i>
-                                    </span>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
-                                       <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>View</a>
-                                       <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>Delete</a>
-                                       <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Edit</a>
-                                       <a class="dropdown-item" href="#"><i class="ri-printer-fill mr-2"></i>Print</a>
-                                       <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>Download</a>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="iq-card-body">
-                              <div class="table-responsive">
-                                 <table class="table mb-0 table-borderless">
-                                    <thead>
-                                       <tr>
-                                          <th scope="col">Patient</th>
-                                          <th scope="col">Patient Name </th>
-                                          <th scope="col">Doctors Team</th>
-                                          <th scope="col">Date Of Operation</th>
-                                          <th scope="col"> Report</th>
-                                          <th scope="col">Diseases</th>
-                                       </tr>
-                                    </thead>
-                                    <tbody>
-                                       <tr>
-                                          <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="images/user/01.jpg" alt="profile"></td>
-                                          <td>Petey Cruiser</td>
-                                          <td>
-                                             <div class="iq-media-group">
-                                                <a href="#" class="iq-media">
-                                                <img class="img-fluid avatar-40 rounded-circle" src="images/user/05.jpg" alt="">
-                                                </a>
-                                                <a href="#" class="iq-media">
-                                                <img class="img-fluid avatar-40 rounded-circle" src="images/user/06.jpg" alt="">
-                                                </a>
-                                                <a href="#" class="iq-media">
-                                                <img class="img-fluid avatar-40 rounded-circle" src="images/user/07.jpg" alt="">
-                                                </a>
-                                             </div>
-                                          </td>
-                                          <td>12-02-2020</td>
-                                          <td><i class="ri-file-pdf-line font-size-16 text-danger"></i></td>
-                                          <td>Fracture</td>
-                                       </tr>
-                                       <tr>
-                                          <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="images/user/02.jpg" alt="profile"></td>
-                                          <td>Anna Sthesia</td>
-                                          <td>
-                                             <div class="iq-media-group">
-                                                <a href="#" class="iq-media">
-                                                <img class="img-fluid avatar-40 rounded-circle" src="images/user/05.jpg" alt="">
-                                                </a>
-                                                <a href="#" class="iq-media">
-                                                <img class="img-fluid avatar-40 rounded-circle" src="images/user/06.jpg" alt="">
-                                                </a>
-                                                <a href="#" class="iq-media">
-                                                <img class="img-fluid avatar-40 rounded-circle" src="images/user/07.jpg" alt="">
-                                                </a>
-                                             </div>
-                                          </td>
-                                          <td>14-02-2020</td>
-                                          <td><i class="ri-file-pdf-line font-size-16 text-danger"></i></td>
-                                          <td>Cataract surgery</td>
-                                       </tr>
-                                       <tr>
-                                          <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="images/user/03.jpg" alt="profile"></td>
-                                          <td>Paul Molive</td>
-                                          <td>
-                                             <div class="iq-media-group">
-                                                <a href="#" class="iq-media">
-                                                <img class="img-fluid avatar-40 rounded-circle" src="images/user/05.jpg" alt="">
-                                                </a>
-                                                <a href="#" class="iq-media">
-                                                <img class="img-fluid avatar-40 rounded-circle" src="images/user/06.jpg" alt="">
-                                                </a>
-                                                <a href="#" class="iq-media">
-                                                <img class="img-fluid avatar-40 rounded-circle" src="images/user/07.jpg" alt="">
-                                                </a>
-                                             </div>
-                                          </td>
-                                          <td>14-02-2020</td>
-                                          <td><i class="ri-file-pdf-line font-size-16 text-danger"></i></td>
-                                          <td>Cancer</td>
-                                          
-                                       </tr>
-                                       <tr>
-                                          <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="images/user/04.jpg" alt="profile"></td>
-                                          <td>Anna Mull</td>
-                                          <td>
-                                             <div class="iq-media-group">
-                                                <a href="#" class="iq-media">
-                                                <img class="img-fluid avatar-40 rounded-circle" src="images/user/05.jpg" alt="">
-                                                </a>
-                                                <a href="#" class="iq-media">
-                                                <img class="img-fluid avatar-40 rounded-circle" src="images/user/06.jpg" alt="">
-                                                </a>
-                                                <a href="#" class="iq-media">
-                                                <img class="img-fluid avatar-40 rounded-circle" src="images/user/07.jpg" alt="">
-                                                </a>
-                                             </div>
-                                          </td>
-                                          <td>16-02-2020</td>
-                                          <td><i class="ri-file-pdf-line font-size-16 text-danger"></i></td>
-                                          <td>Hysterectomy</td>
-                                       </tr>
-                                       <tr>
-                                          <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="images/user/05.jpg" alt="profile"></td>
-                                          <td>Ruby saul</td>
-                                          <td>
-                                             <div class="iq-media-group">
-                                                <a href="#" class="iq-media">
-                                                <img class="img-fluid avatar-40 rounded-circle" src="images/user/05.jpg" alt="">
-                                                </a>
-                                                <a href="#" class="iq-media">
-                                                <img class="img-fluid avatar-40 rounded-circle" src="images/user/06.jpg" alt="">
-                                                </a>
-                                                <a href="#" class="iq-media">
-                                                <img class="img-fluid avatar-40 rounded-circle" src="images/user/07.jpg" alt="">
-                                                </a>
-                                             </div>
-                                          </td>
-                                          <td>18-02-2020</td>
-                                          <td><i class="ri-file-pdf-line font-size-16 text-danger"></i></td>
-                                          <td>Cancer</td>
-                                       </tr>
-                                    </tbody>
-                                 </table>
-                              </div>
-                           </div>
-                         </div> 
-                        </div>                        
-                        <div class="col-md-12 col-lg-6">
-                           <div class="row">
-                              <div class="col-md-6 col-lg-12">
-                                 <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-                                    <div class="iq-card-body">
-                                       <div class="iq-info-box d-flex align-items-center p-3">
-                                          <div class="info-image mr-3">
-                                             <img src="images/page-img/30.png" class="img-fluid" alt="image-box">
-                                          </div>
-                                          <div class="info-text">
-                                             <h3>120</h3>
-                                             <span>Total Appointments</span>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="col-md-6 col-lg-12">
-                                 <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-                                    <div class="iq-card-body">
-                                       <div class="iq-info-box d-flex align-items-center p-3">
-                                          <div class="info-image mr-3">
-                                             <img src="images/page-img/31.png" class="img-fluid" alt="image-box">
-                                          </div>
-                                          <div class="info-text">
-                                             <h3>5000</h3>
-                                             <span>Completed Appointments</span>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="col-md-6 col-lg-12">
-                                 <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-                                    <div class="iq-card-body">
-                                       <div class="iq-info-box d-flex align-items-center p-3">
-                                          <div class="info-image mr-3">
-                                             <img src="images/page-img/32.png" class="img-fluid" alt="image-box">
-                                          </div>
-                                          <div class="info-text">
-                                             <h3>1500</h3>
-                                             <span>Cancelled Appointments</span>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="col-md-6 col-lg-12">
-                                 <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-                                    <div class="iq-card-body">
-                                       <div class="iq-info-box d-flex align-items-center p-3">
-                                          <div class="info-image mr-3">
-                                             <img src="images/page-img/33.png" class="img-fluid" alt="image-box">
-                                          </div>
-                                          <div class="info-text">
-                                             <h3>500</h3>
-                                             <span>Followup Appointments</span>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-md-12 col-lg-6">
-                           <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-                              <div class="iq-card-header d-flex justify-content-between">
-                                 <div class="iq-header-title">
-                                    <h4 class="card-title">Recent Activity</h4>
-                                 </div>
-                                 <div class="iq-card-header-toolbar d-flex align-items-center">
-                                    <div class="dropdown">
-                                       <span class="dropdown-toggle text-primary" id="dropdownMenuButton4" data-toggle="dropdown">
-                                       View All
-                                       </span>
-                                       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton4">
-                                          <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>View</a>
-                                          <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>Delete</a>
-                                          <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Edit</a>
-                                          <a class="dropdown-item" href="#"><i class="ri-printer-fill mr-2"></i>Print</a>
-                                          <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>Download</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="iq-card-body">
-                                 <ul class="iq-timeline">
-                                    <li>
-                                       <div class="timeline-dots-fill"></div>
-                                       <h6 class="float-left mb-2 text-dark"><i class="ri-user-fill"></i> 5 min ago</h6>
-                                       <small class="float-right mt-1">Active</small>
-                                       <div class="d-inline-block w-100">
-                                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque </p>
-                                       </div>
-                                    </li>
-                                    <li>
-                                       <div class="timeline-dots-fill bg-success"></div>
-                                       <h6 class="float-left mb-2 text-dark"><i class="ri-user-fill"></i> 6 min ago</h6>
-                                       <small class="float-right mt-1">Away</small>
-                                       <div class="d-inline-block w-100">
-                                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque</p>
-                                       </div>
-                                    </li>
-                                    <li>
-                                       <div class="timeline-dots-fill bg-info"></div>
-                                       <h6 class="float-left mb-2 text-dark"><i class="ri-user-fill"></i> 10 min ago</h6>
-                                       <small class="float-right mt-1">Active</small>
-                                       <div class="d-inline-block w-100">
-                                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque</p>
-                                       </div>
-                                    </li>
-                                    <li>
-                                       <div class="timeline-dots-fill bg-warning"></div>
-                                       <h6 class="float-left mb-2 text-dark"><i class="ri-user-fill"></i> 15 min ago</h6>
-                                       <small class="float-right mt-1">Offline</small>
-                                       <div class="d-inline-block w-100">
-                                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque</p>
-                                       </div>
-                                    </li>
-                                    <li>
-                                       <div class="timeline-dots-fill bg-danger"></div>
-                                       <h6 class="float-left mb-2 text-dark"><i class="ri-user-fill"></i> 18 min ago</h6>
-                                       <small class="float-right mt-1">Away</small>
-                                       <div class="d-inline-block w-100">
-                                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque</p>
-                                       </div>
-                                    </li>
-                                 </ul>
-                              </div>
-                           </div>
-                        </div>
-                     </div>             
-                  </div>
-                  <div class="col-md-12 col-lg-4">
-                     <div class="iq-card">
-                        <div class="iq-card-header d-flex justify-content-between">
-                           <div class="iq-header-title">
-                              <h4 class="card-title">Total Accident Report</h4>
-                           </div>
-                        </div>
-                        <div class="iq-card-body">
-                           <div class="row">
-                              <div class="col-sm-6">
-                                 <h3>$40K</h3>
-                              </div>
-                           </div>
-                           <div id="chart-7"></div>
-                           <div class="row text-center mt-3">
-                               <div class="col-sm-6">
-                                   <h6 class="text-truncate d-block">Last Month</h6>
-                                   <p class="m-0">358</p>
-                               </div>
-                               <div class="col-sm-6">
-                                   <h6 class="text-truncate d-block">Current Month</h6>
-                                   <p class="m-0">194</p>
-                               </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="iq-card">
-                        <div class="iq-card-header d-flex justify-content-between">
-                           <div class="iq-header-title">
-                              <h4 class="card-title">Total Death Report</h4>
-                           </div>
-                        </div>
-                        <div class="iq-card-body">
-                           <div class="row">
-                              <div class="col-sm-6">
-                                 <h3>$20K</h3>
-                              </div>
-                           </div>
-                           <div id="chart-8"></div>
-                           <div class="row text-center mt-3">
-                               <div class="col-sm-6">
-                                   <h6 class="text-truncate d-block">Last Month</h6>
-                                   <p class="m-0">220</p>
-                               </div>
-                               <div class="col-sm-6">
-                                   <h6 class="text-truncate d-block">Current Month</h6>
-                                   <p class="m-0">120</p>
-                               </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="iq-card">
-                        <div class="iq-card-header d-flex justify-content-between">
-                           <div class="iq-header-title">
-                              <h4 class="card-title">Overall Progress</h4>
-                           </div>
-                        </div>
-                        <div class="iq-card-body">
-                           <div id="apex-radialbar-chart"></div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-      <!-- Footer -->
-         <footer class="bg-white iq-footer">
-            <div class="container-fluid">
-               <div class="row">
-                  <div class="col-lg-6">
-                     <ul class="list-inline mb-0">
-                        <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
-                        <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
-                     </ul>
-                  </div>
-                  <div class="col-lg-6 text-right">
-                     Copyright 2020 <a href="#">XRay</a> All Rights Reserved.
-                  </div>
-               </div>
-            </div>
-         </footer>
-      <!-- Footer END -->
-         </div>
-      </div>
-      <!-- Wrapper END -->
+
+        <!-- Page Content  -->
+        <div id="content">
+
+           
+            @yield('content')
+           
+        </div>
+    </div>
+   
+    <script src="{{url('libs/jquery/jquery.min.js') }}"></script>
+  
+      <script src="{{ url('js/popper.min.js') }}"></script>
+	  
+      <script src="{{ url('js/bootstrap.min.js') }}"></script>
+	  
+      <script src="{{ url('js/jquery.appear.js') }}"></script>
+	  
+      <script src="{{ url('js/countdown.min.js') }}"></script>
+      <script src="{{ url('js/waypoints.min.js') }}"></script>
+      <script src="{{ url('js/jquery.counterup.min.js') }}"></script>
+      <script src="{{ url('js/wow.min.js') }}"></script>
+      <script src="{{ url('js/apexcharts.js') }}"></script>
+      <script src="{{ url('js/slick.min.js') }}"></script>
+      <script src="{{ url('js/select2.min.js') }}"></script>
+      <script src="{{ url('js/owl.carousel.min.js') }}"></script>
+      <script src="{{ url('js/jquery.magnific-popup.min.js') }}"></script>
+      <script src="{{ url('js/smooth-scrollbar.js') }}"></script>
+      <script src="{{ url('js/lottie.js') }}"></script>
+      <script src="{{ url('js/chart-custom.js') }}"></script>
+      <script src="{{ url('js/custom.js') }}"></script>
+    <script src="{{url('libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+   
+    <script src="{{url('libs/metismenu/metisMenu.min.js') }}"></script>
+   
+    <script src="{{url('libs/simplebar/simplebar.min.js') }}"></script>
+    
+    <script src="{{ url('libs/node-waves/waves.min.js') }}"></script>
+
+    <!-- apexcharts -->
+    
+    <script src="{{ url('libs/apexcharts/apexcharts.min.js') }}"></script>
+
+    <!-- dashboard init -->
+   
+    <script src=" {{ url('js/pages/dashboard.init.js') }}"></script>
+
+    <!-- App js -->
+    
+    <script src="{{ url('js/app.js') }}"></script>
+      <!-- Required datatable js -->
+     
+      <script src=" {{ url('libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+     
+        <script src=" {{ url('libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+        <!-- Buttons examples -->
+        
+        <script src="{{ url('libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
       
-      <!-- Optional JavaScript -->
-      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-      <script src="assets/js/jquery.min.js"></script>
-      <script src="assets/js/popper.min.js"></script>
-      <script src="assets/js/bootstrap.min.js"></script>
-      <!-- Appear JavaScript -->
-      <script src="assets/js/jquery.appear.js"></script>
-      <!-- Countdown JavaScript -->
-      <script src="js/countdown.min.js"></script>
-      <!-- Counterup JavaScript -->
-      <script src="assets/js/waypoints.min.js"></script>
-      <script src="assets/js/jquery.counterup.min.js"></script>
-      <!-- Wow JavaScript -->
-      <script src="assets/js/wow.min.js"></script>
-      <!-- Apexcharts JavaScript -->
-      <script src="assets/js/apexcharts.js"></script>
-      <!-- Slick JavaScript -->
-      <script src="assets/js/slick.min.js"></script>
-      <!-- Select2 JavaScript -->
-      <script src="assets/js/select2.min.js"></script>
-      <!-- Owl Carousel JavaScript -->
-      <script src="assets/js/owl.carousel.min.js"></script>
-      <!-- Magnific Popup JavaScript -->
-      <script src="assets/js/jquery.magnific-popup.min.js"></script>
-      <!-- Smooth Scrollbar JavaScript -->
-      <script src="assets/js/smooth-scrollbar.js"></script>
-      <!-- lottie JavaScript -->
-      <script src="assets/js/lottie.js"></script>
-      <!-- am core JavaScript -->
-      <script src="assets/js/core.js"></script>
-      <!-- am charts JavaScript -->
-      <script src="assets/js/charts.js"></script>
-      <!-- am animated JavaScript -->
-      <script src="assets/js/animated.js"></script>
-      <!-- am kelly JavaScript -->
-      <script src="assets/js/kelly.js"></script>
-      <!-- Flatpicker Js -->
-      <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-      <!-- Chart Custom JavaScript -->
-      <script src="assets/js/chart-custom.js"></script>
-      <!-- Custom JavaScript -->
-      <script src="assets/js/custom.js"></script>
-   </body>
+        <script src="  {{ url('libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
+       
+        <script src=" {{ url('libs/jszip/jszip.min.js') }}"></script>
+      
+        <script src="  {{ url('libs/pdfmake/build/pdfmake.min.js') }}"></script>
+       
+        <script src=" {{ url('libs/pdfmake/build/vfs_fonts.js') }}"></script>
+        
+        <script src="{{ url('libs/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+      
+        <script src="{{ url('libs/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+        
+        <script src="{{ url('libs/datatables.net-buttons/js/buttons.colVis.min.js') }}"></script>
+       
+        <script src=" {{ url('js/pages/profile.init.js') }}"></script>
+        
+        <!-- Responsive examples -->
+      
+        <script src="  {{ url('libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+       
+        <script src=" {{ url('libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
+       
+        <script src=" {{ url('js/pages/datatables.init.js') }}"></script> 
+        
+        <script src="{{ url('libs/dropzone/min/dropzone.min.js') }}   "></script>
+      
+<script src="{{url('js/app.js') }}"></script>
+<script>
+    $.ajaxSetup({
+   headers: {
+       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+   }
+});
+</script>
+
+
+</body>
+
 </html>

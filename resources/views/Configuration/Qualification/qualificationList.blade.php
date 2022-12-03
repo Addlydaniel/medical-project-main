@@ -11,14 +11,14 @@
         <div class="row" >
             <div class="col-10">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0 font-size-18">Category</h4>
+                    <h4 class="mb-sm-0 font-size-18">Qualification</h4>
 
                   
 
                 </div>
               </div>
               <div class="col-2">
-              <a href="{{URL('/addCategory')}}"> <button type="button" class="btn btn-primary waves-effect waves-light">Add Category</button></a>
+              <a href="{{URL('/addQualification')}}"> <button type="button" class="btn btn-primary waves-effect waves-light">Add Qualification</button></a>
              
             </div>
 </div>
@@ -33,7 +33,7 @@
                     @if(session()->has('message'))
             <div class="alert alert-success">
 						
-						<i class="icon-ok-sign"></i><strong>Success!</strong> Category Updated successfully
+						<i class="icon-ok-sign"></i><strong>Success!</strong> Qualification Updated successfully
 					</div>
             @endif
             @if ($errors->any())
@@ -53,26 +53,24 @@
                             <tr>
                          
                             <th>S.no</th>
-                            <th>Category</th>
-                            <th>Description</th>
-							<th>Action</th>
+                            <th>Qualification</th>
+                            <th>Action</th>
                             </tr>
 
                             </thead>
 
 
                             <tbody>
-                            @foreach($category as $category_data)
+                            @foreach($qualification as $qualification_data)
                             <tr>
                           
-                            <td>{{$category_data->id}}</td>
-							<td>{{$category_data->category_name}}</td>
-							<td>{{$category_data->category_description}}</td>
+                            <td>{{$qualification_data->id}}</td>
+							<td>{{$qualification_data->qualification_name}}</td>
                                 <td class="center">
                                   <div class="btn-toolbar row-action">
                                     <div class="btn-group">
-                                    <a class="btn btn-primary"href="{{ URL('/editCategory/'.$category_data->id )}}"title="Edit">Edit</a>
-                                    <a class="btn btn-danger"href="{{ URL('/deleteCategory/'.$category_data->id )}}"title="Delete">Delete</a>
+                                    <a class="btn btn-primary"href="{{ URL('/editQualification/'.$qualification_data->id )}}"title="Edit">Edit</a>
+                                    <a class="btn btn-danger"href="{{ URL('/deleteQualification/'.$qualification_data->id )}}"title="Delete">Delete</a>
                                   
                                     </div>
                                   </div>

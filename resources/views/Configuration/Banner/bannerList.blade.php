@@ -11,14 +11,14 @@
         <div class="row" >
             <div class="col-10">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0 font-size-18">Category</h4>
+                    <h4 class="mb-sm-0 font-size-18">Banner</h4>
 
                   
 
                 </div>
               </div>
               <div class="col-2">
-              <a href="{{URL('/addCategory')}}"> <button type="button" class="btn btn-primary waves-effect waves-light">Add Category</button></a>
+              <a href="{{URL('/addBanner')}}"> <button type="button" class="btn btn-primary waves-effect waves-light">Add Banner</button></a>
              
             </div>
 </div>
@@ -33,7 +33,7 @@
                     @if(session()->has('message'))
             <div class="alert alert-success">
 						
-						<i class="icon-ok-sign"></i><strong>Success!</strong> Category Updated successfully
+						<i class="icon-ok-sign"></i><strong>Success!</strong> Banner Updated successfully
 					</div>
             @endif
             @if ($errors->any())
@@ -53,26 +53,26 @@
                             <tr>
                          
                             <th>S.no</th>
-                            <th>Category</th>
-                            <th>Description</th>
-							<th>Action</th>
+                            <th>Banner name</th>
+                            <th>Banner image</th>
+						    <th>Action</th>
                             </tr>
 
                             </thead>
 
 
                             <tbody>
-                            @foreach($category as $category_data)
+                            @foreach($banner as $banner_data)
                             <tr>
                           
-                            <td>{{$category_data->id}}</td>
-							<td>{{$category_data->category_name}}</td>
-							<td>{{$category_data->category_description}}</td>
+                            <td>{{$banner_data->id}}</td>
+							<td>{{$banner_data->banner_name}}</td>
+							<td>{{$banner_data->banner_image}}</td>
                                 <td class="center">
                                   <div class="btn-toolbar row-action">
                                     <div class="btn-group">
-                                    <a class="btn btn-primary"href="{{ URL('/editCategory/'.$category_data->id )}}"title="Edit">Edit</a>
-                                    <a class="btn btn-danger"href="{{ URL('/deleteCategory/'.$category_data->id )}}"title="Delete">Delete</a>
+                                    <a class="btn btn-primary"href="{{ URL('/editBanner/'.$banner_data->id )}}"title="Edit">Edit</a>
+                                    <a class="btn btn-danger"href="{{ URL('/deleteBanner/'.$banner_data->id )}}"title="Delete">Delete</a>
                                   
                                     </div>
                                   </div>

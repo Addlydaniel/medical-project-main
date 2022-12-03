@@ -42,19 +42,15 @@
 											<div class="mb-3">
                                                 <label for="formrow-firstname-input" class="form-label">Category Name</label>
                                              
-                                                <input type="text" class="form-control" id="loanName" name="loanName" value="{{old('loanName')}}" placeholder="Loan Name" required="">
+                                                <input type="text" class="form-control" id="category_name" name="category_name" value="{{old('category_name')}}" placeholder="Category Name" required="">
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="formrow-firstname-input" class="form-label">Service Code</label>
+											<div class="mb-3">
+                                                <label for="formrow-firstname-input" class="form-label">Category description</label>
                                              
-                                                <input type="text" class="form-control" id="loanCode" name="loanCode" value="{{old('loanCode')}}" placeholder="Service Code" required="">
+                                                <input type="text" class="form-control" id="category_description" name="category_description" value="{{old('category_description')}}" placeholder="Category Description" required="">
                                             </div>
-                                            <div class="mb-3">
-                                                        <label for="formrow-firstname-input" class="form-label">Description</label>
-                                                        <textarea class="form-control" id="loanDescription" name="loanDescription" >{{old('loanDescription')}}</textarea>
-                                                    
-                                                </div>
-                                             
+                                           
+                                           
                                             <div>
                                             <button type="submit" class="btn btn-primary w-md"> Submit</button>
                                                 

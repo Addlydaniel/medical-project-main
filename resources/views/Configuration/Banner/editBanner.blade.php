@@ -9,7 +9,7 @@
                         <div class="row" >
             <div class="col-8">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0 font-size-18">Edit Category</h4>
+                    <h4 class="mb-sm-0 font-size-18">Edit Banner</h4>
 
                   
 
@@ -17,7 +17,7 @@
               </div>
               <div class="col-4">
            
-                                  <a href="{{URL('/category')}}"> <button type="button" class="btn btn-danger waves-effect waves-light"> Back</button></a>
+                                  <a href="{{URL('/bannerList')}}"> <button type="button" class="btn btn-danger waves-effect waves-light"> Back</button></a>
                                                
             </div>
 </div>
@@ -38,13 +38,19 @@
                                     <div class="card-body">
                                    
 
-                                    <form class="form-horizontal" method="post" action="{{ URL('/updateCategory/' )}}">
+                                    <form class="form-horizontal" method="post" action="{{ URL('/updateBanner/' )}}">
                                    @csrf
                                             
 									<div class="mb-3">
-										<label for="formrow-firstname-input" class="form-label">Category Name</label>
-										<input type="hidden" class="form-control" id="id" name="id" value="{{$category->id}}" placeholder="Category Name" required="">
-										<input type="text" class="form-control" id="category_name" name="category_name" value="{{$category->category_name}}" placeholder="Qualification Name" required="">
+										<label for="formrow-firstname-input" class="form-label">Banner Name</label>
+										<input type="hidden" class="form-control" id="id" name="id" value="{{$banner->id}}" placeholder="Banner Name" required="">
+										<input type="text" class="form-control" id="banner_name" name="banner_name" value="{{$banner->banner_name}}" placeholder="Qualification Name" required="">
+									</div>
+									
+									<div class="mb-3">
+										<label for="formrow-firstname-input" class="form-label">Banner image</label>
+										<input type="hidden" class="form-control" id="id" name="id" value="{{$banner->id}}" placeholder="Banner image" required="">
+										<input type="text" class="form-control" id="banner_image" name="banner_image" value="{{$banner->banner_image}}" placeholder="Qualification Name" required="">
 									</div>
                                            
                                         
