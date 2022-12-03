@@ -6,6 +6,7 @@ use App\Models\Department;
 use App\Models\Category;
 use App\Models\HospitalCategory;
 use App\Models\Banner;
+use App\Models\City;
 use App\Models\District;
 use App\Models\BloodGroup;
 use Session;
@@ -542,5 +543,82 @@ class ConfigurationController extends Controller
 					BloodGroup::where('id', $ID)->delete();
 					return redirect()->back()->with('message', 'BloodGroup Deleted Successfully');
 					}
+	//city
 	
+	
+				public function cityList()
+				{
+				$city=City::get();
+				return view('configuration/City/cityList')->with('city',$city);
+				}
+
+				public function addCity()
+				{
+				return view('configuration/City/addCity');
+				}
+				 
+				 
+				public function submitCity(Request $request)
+				{
+				$input=$request->all();
+				$validator = Validator::make($request->all(), [
+				'city_name' => 'required',
+				'district_name' => 'required',
+				]);
+
+				if ($validator->fails()) {
+				return redirect()->back()->withErrors($validator)->withInput();
+
+				}
+				else{
+				$city_name=$input['city_name'];
+				$district_name=$input['district_name'];
+				City::insertGetId([
+				'city_name'=>$city_name,
+				'district_name'=>$district_name,
+				'created_at'=> date("Y-m-d H:i:s")
+				]);
+				}
+				return redirect('/cityList')->with('message','Success! Your City Added Successfully');
+
+
+
+				}
+				public function editCity($ID)
+				{
+				$city=City::where([['id',$ID]])->first();
+
+				return view('configuration/City/editCity')->with('city',$city);
+				}
+				public function updateCity(Request $request)
+				{
+				$input=$request->all();
+				$validator = Validator::make($request->all(), [
+
+				'city_name' => 'required',
+
+
+				]);
+
+				if ($validator->fails()) {
+				return redirect()->back()->withErrors($validator)->withInput();
+
+				}
+				else{
+				$id=$input['id'];
+				$city_name=$input['city_name'];
+				$district_name=$input['district_name'];
+				City::where('id',$id)->update([
+				'city_name'=>$city_name,
+				'district_name'=>$district_name,
+				'created_at'=> date("Y-m-d H:i:s")
+				]);
+				return redirect('/cityList')->with('message','Success! Your City Updated Successfully');
+				}        
+				}
+				public function deleteCity($ID)
+				{  
+				City::where('id', $ID)->delete();
+				return redirect()->back()->with('message', 'City Deleted Successfully');
+				}
 }						

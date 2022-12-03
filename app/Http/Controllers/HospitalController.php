@@ -34,36 +34,39 @@ class HospitalController extends Controller
    
    
     public function addbranch($ID) {
-				 $branch=Branch::where('hospital_id',$ID)->get();
+				 $branch=Branch::where('id',$ID)->get();
 	   return view('hospital/addbranch')->with('branch',$branch)->with('id',$ID);
     }
         
        public function submitBranch(Request $request) {
-		  
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+					'address_line1' => 'required',
+					]);
 
-        
-				$input=$request->all();
-             
-								
-								 $hospital_id=$input['hospital_id'];
-                                $address_line1=$input['address_line1'];
-                                $address_line2=$input['address_line2'];
-                                $branch_district=$input['branch_district'];
-                                $branch_state=$input['branch_state'];
-                                $branch_city=$input['branch_city'];
-                              
-								Branch::insert([
-												'FamilyID'=>$FamilyID,
-                                                'address_line1'=>$address_line1,
-                                                'address_line2'=>$address_line2,
-                                                'branch_district'=>$branch_district,
-                                                'branch_state'=>$branch_state,
-                                                'branch_city'=>$branch_city,
-                                                'is_delete'=>0,
-												
-												]);
-          
- return redirect('/addhospital'.'/'.$hospital_id)->with('message','Success!  Added Successfully');  		  
-    }
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
 
+					}
+					else{
+					$address_line1=$input['address_line1'];
+					$address_line2=$input['address_line2'];
+					$branch_district=$input['branch_district'];
+					$branch_state=$input['branch_state'];
+					$branch_city=$input['branch_city'];
+					Branch::insertGetId([
+					'address_line1'=>$address_line1,
+					'address_line2'=>$address_line2,
+					'branch_district'=>$branch_district,
+					'branch_state'=>$branch_state,
+					'branch_city'=>$branch_city,
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					}
+				return redirect('/addHospital')->with('message','Success! Your Branch Added Successfully'); 
+
+
+
+				}
+	
 }

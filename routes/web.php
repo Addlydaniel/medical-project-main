@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\HospitalController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\ConfigurationController;
 
 
@@ -102,7 +103,17 @@ use App\Http\Controllers\ConfigurationController;
 		Route::get('/deleteDistrict/{id}', [ConfigurationController::class, 'deleteDistrict']);
 		Route::post('/submitDistrict', [ConfigurationController::class, 'submitDistrict']);
 		Route::post('/updateDistrict', [ConfigurationController::class, 'updateDistrict']);
+		
+		Route::get('/cityList', [ConfigurationController::class, 'cityList']);
+		Route::get('/addCity', [ConfigurationController::class, 'addCity']);
+		Route::get('/editCity/{id}', [ConfigurationController::class, 'editCity']);
+		Route::get('/deleteCity/{id}', [ConfigurationController::class, 'deleteCity']);
+		Route::post('/submitCity', [ConfigurationController::class, 'submitCity']);
+		Route::post('/updateCity', [ConfigurationController::class, 'updateCity']);
 
+		Route::get('/doctorList', [DoctorController::class, 'doctorList']);
+		Route::get('/viewDoctor', [DoctorController::class, 'viewDoctor']);
+		
         // Route::get('/viewApplication', ['as'=>'viewApplication','uses'=>'App\Http\Controllers\UserController@viewApplication']);
 
       

@@ -106,7 +106,8 @@
                      <li><a href="{{url('bannerList')}}" class="iq-waves-effect"><i class="ion-heart"></i><span>Banner</span></a></li>
 			        <li><a href="{{url('districtList')}}" class="iq-waves-effect"><i class="ion-heart"></i><span>District</span></a></li>
 			        <li><a href="{{url('blood_groupList')}}" class="iq-waves-effect"><i class="ion-heart"></i><span>BloodGroup</span></a></li>
-
+			        <li><a href="{{url('cityList')}}" class="iq-waves-effect"><i class="ion-heart"></i><span>City</span></a></li>
+			        
                     
                     
                   </ul>

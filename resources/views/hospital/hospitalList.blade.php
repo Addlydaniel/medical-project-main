@@ -13,6 +13,7 @@
               </div>
               <div class="col-2">
               <a href="{{URL('/addHospital')}}"> <button type="button" class="btn btn-primary waves-effect waves-light">Add Hospital</button></a>
+              <a href="{{URL('/viewDoctor')}}"> <button type="button" class="btn btn-primary waves-effect waves-light">View Doctor</button></a>
              
             </div>
 </div>           <div class="iq-card-body">
@@ -58,7 +59,5 @@
                            </div>
                         </div>
                      </div>
-                  </div>
-               </div>
-            </div>
+                  
             @endsection
