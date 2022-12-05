@@ -38,13 +38,17 @@
                                     <div class="card-body">
                                    
 
-                                    <form class="form-horizontal" method="post" action="{{ URL('/updateCategory/' )}}">
+                                    <form class="form-horizontal" method="post" action="{{ URL('/updateHospitalCategory/' )}}">
                                    @csrf
                                             
 									<div class="mb-3">
 										<label for="formrow-firstname-input" class="form-label">Category Name</label>
 										<input type="hidden" class="form-control" id="id" name="id" value="{{$category->id}}" placeholder="Category Name" required="">
-										<input type="text" class="form-control" id="category_name" name="category_name" value="{{$category->category_name}}" placeholder="Qualification Name" required="">
+										<input type="text" class="form-control" id="category_name" name="category_name" value="{{$category->category_name}}" placeholder="Category Name" required="">
+									</div>
+									<div class="mb-3">
+										<label for="formrow-firstname-input" class="form-label">Category Description</label>
+										<input type="text" class="form-control" id="category_description" name="category_description" value="{{$category->category_description}}" placeholder="Category Description" required="">
 									</div>
                                            
                                         

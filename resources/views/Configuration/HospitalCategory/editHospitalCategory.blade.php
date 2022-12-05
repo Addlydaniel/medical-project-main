@@ -9,7 +9,7 @@
                         <div class="row" >
             <div class="col-8">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0 font-size-18">Edit HospitalCategory</h4>
+                    <h4 class="mb-sm-0 font-size-18">Edit Hospital Category</h4>
 
                   
 
@@ -43,8 +43,8 @@
                                             
 									<div class="mb-3">
 										<label for="formrow-firstname-input" class="form-label">HospitalCategory Name</label>
-										<input type="hidden" class="form-control" id="id" name="id" value="{{$hospitalCategory->id}}" placeholder="HospitalCategory Name" required="">
-										<input type="text" class="form-control" id="hospitalCategory_name" name="hospitalCategory_name" value="{{$hospitalCategory->hospitalCategory_name}}" placeholder="Qualification Name" required="">
+										<input type="hidden" class="form-control" id="id" name="id" value="{{$hospital_category->id}}" placeholder="HospitalCategory Name" required="">
+										<input type="text" class="form-control" id="hospital_category_name" name="hospital_category_name" value="{{$hospital_category->hospital_category_name}}" placeholder="Qualification Name" required="">
 									</div>
                                            
                                         

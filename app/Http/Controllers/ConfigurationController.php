@@ -267,8 +267,10 @@ class ConfigurationController extends Controller
 					}
 					else{
 					$category_name=$input['category_name'];
+					$category_description=$input['category_description'];
 					Category::insertGetId([
 					'category_name'=>$category_name,
+					'category_description'=>$category_description,
 					'created_at'=> date("Y-m-d H:i:s")
 					]);
 					}
@@ -300,8 +302,10 @@ class ConfigurationController extends Controller
 					else{
 					$id=$input['id'];
 					$category_name=$input['category_name'];
+					$category_description=$input['category_description'];
 					Category::where('id',$id)->update([
 					'category_name'=>$category_name,
+					'category_description'=>$category_description,
 					'created_at'=> date("Y-m-d H:i:s")
 					]);
 					return redirect('/categoryList')->with('message','Success! Your Category Updated Successfully'); 
@@ -356,11 +360,10 @@ class ConfigurationController extends Controller
 
 
 				}
-				public function editHospitalCatogory($ID) 
+				public function editHospitalCategory($ID) 
 				{
 					$hospital_category=HospitalCategory::where([['id',$ID]])->first();
-
-					return view('configuration/HospitalCategory/editHospitalCatogory')->with('hospital_category',$hospital_category);
+					return view('configuration/HospitalCategory/editHospitalCategory')->with('hospital_category',$hospital_category);
 				}
 				public function updateHospitalCategory(Request $request) 
 				{
@@ -383,8 +386,8 @@ class ConfigurationController extends Controller
 					$hospital_category_image=$input['hospital_category_name'];
 					HospitalCategory::where('id',$id)->update([
 					'hospital_category_name'=>$hospital_category_name,
-					'hospital_category_name'=>$hospital_category_description,
-					'hospital_category_name'=>$hospital_category_image,
+					'hospital_category_description'=>$hospital_category_description,
+					'hospital_category_image'=>$hospital_category_image,
 					'created_at'=> date("Y-m-d H:i:s")
 					]);
 					return redirect('/hospitalCategoryList')->with('message','Success! Your Hospital Category Updated Successfully'); 

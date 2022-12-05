@@ -73,7 +73,7 @@
                                 <td class="center">
                                   <div class="btn-toolbar row-action">
                                     <div class="btn-group">
-                                    <a class="btn btn-primary"href="{{ URL('/edithospitalCategory/'.$hospitalCategory_data->id )}}"title="Edit">Edit</a>
+                                    <a class="btn btn-primary"href="{{ URL('/editHospitalCategory/'.$hospitalCategory_data->id )}}"title="Edit">Edit</a>
                                     <a class="btn btn-danger"href="{{ URL('/deleteHospitalCategory/'.$hospitalCategory_data->id )}}"title="Delete">Delete</a>
                                   
                                     </div>
