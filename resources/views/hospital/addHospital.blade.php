@@ -61,10 +61,7 @@
                                        <input type="text" class="form-control" id="lname" placeholder="Location">
                                     </div>
 									
-                                    <div class="form-group col-md-4">
-                                       <label for="add1">Mail</label>
-                                       <input type="text" class="form-control" id="add1" placeholder="example@gmail.com">
-                                    </div>
+                                   
                                     <div class="form-group col-sm-4">
                                        <label>Category</label>
                                        <select class="form-control" id="selectcountry">
@@ -80,6 +77,9 @@
 									
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Add Branch
+</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
+  Add Doctor
 </button>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -132,9 +132,7 @@
     </div>
   </div>
 </div>
- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
-  Add Doctor
-</button>
+ 
 <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -191,7 +189,7 @@
       </div>
     </div>
   </div>
-</div>
+</div><br>
 								
 								  <div class="form-group col-md-4">
                                  <button type="submit" class="btn btn-success">submit</button>
