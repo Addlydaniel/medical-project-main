@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\TokenController;
 use App\Http\Controllers\ConfigurationController;
 
 
@@ -110,9 +111,30 @@ use App\Http\Controllers\ConfigurationController;
 		Route::get('/deleteCity/{id}', [ConfigurationController::class, 'deleteCity']);
 		Route::post('/submitCity', [ConfigurationController::class, 'submitCity']);
 		Route::post('/updateCity', [ConfigurationController::class, 'updateCity']);
+		
+		Route::get('/scheduleList', [ConfigurationController::class, 'scheduleList']);
+		Route::get('/addSchedule', [ConfigurationController::class, 'addSchedule']);
+		Route::get('/editSchedule/{id}', [ConfigurationController::class, 'editSchedule']);
+		Route::get('/deleteSchedule/{id}', [ConfigurationController::class, 'deleteSchedule']);
+		Route::post('/submitSchedule', [ConfigurationController::class, 'submitSchedule']);
+		Route::post('/updateSchedule', [ConfigurationController::class, 'updateSchedule']);
 
 		Route::get('/doctorList', [DoctorController::class, 'doctorList']);
 		Route::get('/viewDoctor', [DoctorController::class, 'viewDoctor']);
+		
+		Route::get('/blood_groupList', [ConfigurationController::class, 'blood_groupList']);
+		Route::get('/addBloodGroup', [ConfigurationController::class, 'addBloodGroup']);
+		Route::get('/editBloodGroup/{id}', [ConfigurationController::class, 'editBloodGroup']);
+		Route::get('/deleteBloodGroup/{id}', [ConfigurationController::class, 'deleteBloodGroup']);
+		Route::post('/submitBloodGroup', [ConfigurationController::class, 'submitBloodGroup']);
+		Route::post('/updateBloodGroup', [ConfigurationController::class, 'updateBloodGroup']);
+		
+		Route::get('/tokenList', [TokenController::class, 'tokenList']);
+		Route::get('/addToken', [TokenController::class, 'addToken']);
+		Route::get('/editToken/{id}', [TokenController::class, 'editToken']);
+		Route::get('/deleteToken/{id}', [TokenController::class, 'deleteToken']);
+		Route::post('/submitToken', [TokenController::class, 'submitToken']);
+		Route::post('/updateToken', [TokenController::class, 'updateToken']);
 		
         // Route::get('/viewApplication', ['as'=>'viewApplication','uses'=>'App\Http\Controllers\UserController@viewApplication']);
 

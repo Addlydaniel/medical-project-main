@@ -8,7 +8,7 @@
                      <div class="iq-card">
                         <div class="iq-card-header d-flex justify-content-between">
                            <div class="iq-header-title">
-                              <h4 class="card-title">Doctor Information</h4>
+                              <h4 class="card-title">Hospital Information</h4>
                            </div>
                         </div>
                         <div class="iq-card-body">
@@ -31,8 +31,41 @@
                                        <label for="add2">Address</label>
                                        <input type="text" class="form-control" id="add2" name="" placeholder=" Address ">
                                     </div>
-                                    
-                                    <div class="form-group col-sm-6">
+                                    <div class="form-group col-md-4">
+                                       <label for="add2">Hospital city</label>
+                                       <input type="text" class="form-control" id="add2" placeholder=" city ">
+                                    </div><div class="form-group col-md-4">
+                                       <label for="add2">Hospital Street</label>
+                                       <input type="text" class="form-control" id="add2" placeholder="  Street ">
+                                    </div><div class="form-group col-md-4">
+                                       <label for="add2">Hospital District</label>
+                                       <input type="text" class="form-control" id="add2" placeholder=" District ">
+                                    </div><div class="form-group col-md-4">
+                                       <label for="add2">Hospital pincode</label>
+                                       <input type="text" class="form-control" id="add2" placeholder="pincode ">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                       <label for="lname">Emergency Contact</label>
+                                       <input type="text" class="form-control" id="lname" placeholder="Contact">
+                                    </div>
+									 <div class="form-group col-md-4">
+                                       <label for="lname">Registration Date</label>
+                                       <input type="date"class="form-control" id="lname" placeholder="Date">
+                                    </div>
+									<div class="form-group col-md-4">
+                                       <label for="lname">Registration time</label>
+                                       <input type="time" class="form-control" id="lname" placeholder="time">
+                                    </div>
+									 <div class="form-group col-md-4">
+                                       <label for="lname">Registration Location</label>
+                                       <input type="text" class="form-control" id="lname" placeholder="Location">
+                                    </div>
+									
+                                    <div class="form-group col-md-4">
+                                       <label for="add1">Mail</label>
+                                       <input type="text" class="form-control" id="add1" placeholder="example@gmail.com">
+                                    </div>
+                                    <div class="form-group col-sm-4">
                                        <label>Category</label>
                                        <select class="form-control" id="selectcountry">
                                           <option>Select Category</option>

@@ -8,6 +8,7 @@ use App\Models\HospitalCategory;
 use App\Models\Banner;
 use App\Models\City;
 use App\Models\District;
+use App\Models\Schedule;
 use App\Models\BloodGroup;
 use Session;
 use Carbon;
@@ -624,4 +625,79 @@ class ConfigurationController extends Controller
 				City::where('id', $ID)->delete();
 				return redirect()->back()->with('message', 'City Deleted Successfully');
 				}
+				
+				
+				//schedule function//
+			public function scheduleList() 
+				{
+					$schedule=Schedule::get();
+					return view('configuration/Schedule/scheduleList')->with('schedule',$schedule);
+				}
+				
+				public function addSchedule() 
+				{
+					return view('configuration/Schedule/addSchedule');
+				}
+ 
+  
+				public function submitSchedule(Request $request) 
+					{
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+					'schedule_time' => 'required',
+					]);
+
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
+
+					}
+					else{
+					$schedule_time=$input['schedule_time'];
+					Schedule::insertGetId([
+					'schedule_time'=>date('Y-m-d H:i:s' , strtotime($request->schedule_time)),
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					}
+				return redirect('/scheduleList')->with('message','Success! Your Schedule Added Successfully'); 
+
+
+
+				}
+				public function editSchedule($ID) 
+				{
+					$schedule=Schedule::where([['id',$ID]])->first();
+
+					return view('configuration/Schedule/editSchedule')->with('schedule',$schedule);
+				}
+				public function updateSchedule(Request $request) 
+				{
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+
+					'schedule_time' => 'required',
+
+
+					]);
+
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
+
+					}
+					else{
+					$id=$input['id'];
+					$schedule_time=$input['schedule_time'];
+					Schedule::where('id',$id)->update([
+					'schedule_time'=>date('Y-m-d H:i:s' , strtotime($request->schedule_time)),
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					return redirect('/scheduleList')->with('message','Success! Your Schedule Updated Successfully'); 
+					}         
+				}
+				public function deleteSchedule($ID)
+					{  
+					Schedule::where('id', $ID)->delete();
+					return redirect()->back()->with('message', 'Schedule Deleted Successfully');
+					}		
+					
 }						
+
