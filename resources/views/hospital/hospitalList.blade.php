@@ -24,20 +24,18 @@
                                     <tr>
 									   <th>S.No</th>
                                        <th>Hospital Name</th>
-                                       <th>Contact</th>
-                                       <th>Address</th>
-                                       
-                                      
+                                       <th>Email</th>
+                                       <th>Location</th>
                                        <th>Action</th>
                                     </tr>
                                  </thead>
                                  <tbody>
+								  @foreach($hos as $hos_data)
                                     <tr>
-                                       <td>Joseph Hospital </td>
-                                       <td>Nagercoil</td>
-                                       <td>Scan</td>
-                                       
-                                       <td>2011/04/25</td>
+                                       <td>{{$hos_data->hosId}}</td>
+                                       <td>{{$hos_data->hos_name}}</td>
+                                       <td>{{$hos_data->hos_mail}}</td>
+                                       <td>{{$hos_data->hos_location}}</td>
                                        <td class="center">
                                             <div class="btn-toolbar row-action">
                                                 <div class="btn-group">
@@ -52,7 +50,8 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    
+									@endforeach
+                                    </tbody>
                                     </tr>
                                     
                               </table>

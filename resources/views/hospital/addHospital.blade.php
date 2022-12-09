@@ -13,75 +13,89 @@
                         </div>
                         <div class="iq-card-body">
                            <div class="new-user-info">
-                              <form>
+                              <form class="form-horizontal" method="post" action="{{ URL('/submitHos/' )}}">
+							  @csrf
                                  <div class="row">
                                     <div class="form-group col-md-4">
                                        <label for="fname">Hospital Name</label>
-                                       <input type="text" class="form-control" id="fname"  name="" placeholder="Hospital Name">
+                                       <input type="text" class="form-control" id="fname"  name="hos_name" value="{{old('hos_name')}}" placeholder="Hospital Name">
                                     </div>
                                     <div class="form-group col-md-4">
                                        <label for="lname">Phone</label>
-                                       <input type="text" class="form-control" id="lname" name="" placeholder="phone">
+                                       <input type="text" class="form-control" id="lname" name="hos_phone" value="{{old('hos_phone')}}" placeholder="phone">
                                     </div>
                                     <div class="form-group col-md-4">
                                        <label for="add1">Mail</label>
-                                       <input type="mail" class="form-control" id="add1" name="" placeholder="example@gmail.com">
+                                       <input type="mail" class="form-control" id="add1" name="hos_mail" value="{{old('hos_mail')}}" placeholder="example@gmail.com">
                                     </div>
-                                    <div class="form-group col-md-4">
-                                       <label for="add2">Address</label>
-                                       <input type="text" class="form-control" id="add2" name="" placeholder=" Address ">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                       <label for="add2">Hospital city</label>
-                                       <input type="text" class="form-control" id="add2" placeholder=" city ">
-                                    </div><div class="form-group col-md-4">
+                                    
+                                   
+									<div class="form-group col-md-4">
+									<label for="add2">Hospital city</label>
+
+										<select class="form-control"  name="hos_city" id="hos_city" required="">
+										<option value="0" selected>Choose...</option>
+										@foreach($city as $city_data)
+										<option  value="{{$city_data->id}}">{{$city_data->city_name}}</option>
+										@endforeach
+										</select>
+									</div>
+									
+									
+									<div class="form-group col-md-4">
                                        <label for="add2">Hospital Street</label>
-                                       <input type="text" class="form-control" id="add2" placeholder="  Street ">
-                                    </div><div class="form-group col-md-4">
-                                       <label for="add2">Hospital District</label>
-                                       <input type="text" class="form-control" id="add2" placeholder=" District ">
-                                    </div><div class="form-group col-md-4">
+                                       <input type="text" class="form-control" id="add2" name="hos_street" value="{{old('hos_street')}}" placeholder="  Street ">
+                                    </div>
+									<div class="form-group col-md-4">
+									<label for="add2">Hospital District</label>
+
+										<select class="form-control"  name="hos_district" id="hos_district" required="">
+										<option value="0" selected>Choose...</option>
+										@foreach($district as $district_data)
+										<option  value="{{$district_data->id}}">{{$district_data->district_name}}</option>
+										@endforeach
+										</select>
+									</div>
+									
+									<div class="form-group col-md-4">
                                        <label for="add2">Hospital pincode</label>
-                                       <input type="text" class="form-control" id="add2" placeholder="pincode ">
+                                       <input type="text" class="form-control" id="add2" name="hos_pincode" value="{{old('hos_pincode')}}" placeholder="pincode ">
                                     </div>
                                     <div class="form-group col-md-4">
                                        <label for="lname">Emergency Contact</label>
-                                       <input type="text" class="form-control" id="lname" placeholder="Contact">
+                                       <input type="text" class="form-control" id="lname" name="hos_emergency_contact" value="{{old('hos_emergency_contact')}}" placeholder="Contact">
                                     </div>
 									 <div class="form-group col-md-4">
                                        <label for="lname">Registration Date</label>
-                                       <input type="date"class="form-control" id="lname" placeholder="Date">
+                                       <input type="date"class="form-control" id="lname" name="hos_reg_date" value="{{old('hos_reg_date')}}" placeholder="Date">
                                     </div>
 									<div class="form-group col-md-4">
                                        <label for="lname">Registration time</label>
-                                       <input type="time" class="form-control" id="lname" placeholder="time">
+                                       <input type="time" class="form-control" id="lname" name="hos_reg_time" value="{{old('hos_reg_time')}}" placeholder="time">
                                     </div>
 									 <div class="form-group col-md-4">
                                        <label for="lname">Registration Location</label>
-                                       <input type="text" class="form-control" id="lname" placeholder="Location">
+                                       <input type="text" class="form-control" id="lname" name="hos_location" value="{{old('hos_location')}}" placeholder="Location">
                                     </div>
 									
-                                   
-                                    <div class="form-group col-sm-4">
-                                       <label>Category</label>
-                                       <select class="form-control" id="selectcountry">
-                                          <option>Select Category</option>
-                                          <option>Canada</option>
-                                          <option>Noida</option>
-                                          <option>USA</option>
-                                          <option>India</option>
-                                          <option>Africa</option>
-                                       </select>
+                                   <div class="form-group col-md-4">
+									<label for="add2">Hospital Category</label>
+
+										<select class="form-control"  name="hos_category" id="hos_category" required="">
+										<option value="0" selected>Choose...</option>
+										@foreach($hospital_category as $hospital_category_data)
+										<option  value="{{$hospital_category_data->id}}">{{$hospital_category_data->hospital_category_name}}</option>
+										@endforeach
+										</select>
+									</div>
+                                  
                                     </div>
-                                    </div>
-									
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Add Branch
 </button>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
   Add Doctor
 </button>
-
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -132,7 +146,6 @@
     </div>
   </div>
 </div>
- 
 <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -189,10 +202,12 @@
       </div>
     </div>
   </div>
-</div><br>
+</div>	
+
+
+ 
 								
-								  <div class="form-group col-md-4">
-                                 <button type="submit" class="btn btn-success">submit</button>
+								  <div class="form-group col-md-4"><button type="submit" class="btn btn-success">submit</button>
 								  </div>
                               </form>
                            </div>

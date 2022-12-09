@@ -15,6 +15,7 @@ use Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
+
 class ConfigurationController extends Controller
 {
 	//qualification function//
@@ -698,6 +699,76 @@ class ConfigurationController extends Controller
 					Schedule::where('id', $ID)->delete();
 					return redirect()->back()->with('message', 'Schedule Deleted Successfully');
 					}		
-					
+					//district function//
+					public function districtList() 
+				{
+					$district=District::get();
+					return view('configuration/District/districtList')->with('district',$district);
+				}
+				
+				public function addDistrict() 
+				{
+					return view('configuration/District/addDistrict');
+				}
+ 
+  
+				public function submitDistrict(Request $request) 
+					{
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+					'district_name' => 'required',
+					]);
+
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
+
+					}
+					else{
+					$district_name=$input['district_name'];
+					District::insertGetId([
+					'district_name'=>$district_name,
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					}
+				return redirect('/districtList')->with('message','Success! Your District Added Successfully'); 
+
+
+
+				}
+				public function editDistrict($ID) 
+				{
+					$district=District::where([['id',$ID]])->first();
+
+					return view('configuration/District/editDistrict')->with('district',$district);
+				}
+				public function updateDistrict(Request $request) 
+				{
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+
+					'district_name' => 'required',
+
+
+					]);
+
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
+
+					}
+					else{
+					$id=$input['id'];
+					$district_name=$input['district_name'];
+					District::where('id',$id)->update([
+					'district_name'=>$district_name,
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					return redirect('/districtList')->with('message','Success! Your District Updated Successfully'); 
+					}         
+				}
+				public function deleteDistrict($ID)
+					{  
+					District::where('id', $ID)->delete();
+					return redirect()->back()->with('message', 'District Deleted Successfully');
+					}
 }						
 

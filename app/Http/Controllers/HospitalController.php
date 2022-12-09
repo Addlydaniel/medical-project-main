@@ -3,6 +3,15 @@
 namespace App\Http\Controllers;
 use App\Models\Hospital;
 use App\Models\Branch;
+use App\Models\Hos;
+use App\Models\City;
+use App\Models\District;
+use App\Models\HospitalCategory;
+use Illuminate\Http\Request;
+
+use Session;
+use Carbon;
+use Illuminate\Support\Facades\Validator;
 
 
 use Illuminate\Support\Facades\Http;
@@ -14,8 +23,10 @@ class HospitalController extends Controller
          return view('hospital/hospitalDashboard');
      }
      public function hospitalList() {
+		  $hos=Hos::where([['is_delete',0]])->select('hos.id as hosId','hos_name','hos_phone','hos_mail','hos_location')->get();
+        
        
-        return view('hospital/hospitalList');
+        return view('hospital/hospitalList')->with('hos',$hos);
     }
     public function doctorList() {
        
@@ -27,11 +38,58 @@ class HospitalController extends Controller
     }
   
     public function addHospital() {
-       $hospital=Hospital::get();
+       $hos=Hos::get();
        $branch=Branch::get();
-        return view('hospital/addHospital')->with('hospital',$hospital)->with('branch',$branch);
+       $city=City::get();
+       $district=District::get();
+       $hospital_category=HospitalCategory::get();
+        return view('hospital/addHospital')->with('hos',$hos)->with('branch',$branch)->with('city',$city)->with('district',$district)->with('hospital_category',$hospital_category);
     }
-   
+    public function submitHos(Request $request) {
+					$input=$request->all();
+					$validator = Validator::make($request->all(), [
+					'hos_name' => 'required',
+					]);
+
+					if ($validator->fails()) {
+					return redirect()->back()->withErrors($validator)->withInput();
+
+					}
+					else{
+					$hos_name=$input['hos_name'];
+					$hos_phone=$input['hos_phone'];
+					$hos_mail=$input['hos_mail'];
+					$hos_city=$input['hos_city'];
+					$hos_street=$input['hos_street'];
+					$hos_district=$input['hos_district'];
+					$hos_pincode=$input['hos_pincode'];
+					$hos_emergency_contact=$input['hos_emergency_contact'];
+					$hos_reg_date=$input['hos_reg_date'];
+					$hos_reg_time=$input['hos_reg_time'];
+					$hos_location=$input['hos_location'];
+					$hos_category=$input['hos_category'];
+					Hos::insertGetId([
+					'hos_name'=>$hos_name,
+					'hos_phone'=>$hos_phone,
+					'hos_mail'=>$hos_mail,
+					'hos_city'=>$hos_city,
+					'hos_street'=>$hos_street,
+					'hos_district'=>$hos_district,
+					'hos_pincode'=>$hos_pincode,
+					'hos_emergency_contact'=>$hos_emergency_contact,
+					'hos_reg_date'=>$hos_reg_date,
+					'hos_reg_time'=>$hos_reg_time,
+					'hos_location'=>$hos_location,
+					'hos_category'=>$hos_category,
+					'created_at'=> date("Y-m-d H:i:s")
+					]);
+					}
+				return redirect('/hospitalList')->with('message','Success! Your Hospital Added Successfully'); 
+
+
+
+				}
+				
    
     public function addbranch($ID) {
 				 $branch=Branch::where('id',$ID)->get();

@@ -40,11 +40,12 @@ use App\Http\Controllers\ConfigurationController;
         Route::get('doctorList',[HospitalController::class, 'doctorList']);
         Route::get('addDoctor',[HospitalController::class, 'addDoctor']);
         Route::get('addHospital',[HospitalController::class, 'addHospital']);
+		Route::post('/submitHos', [HospitalController::class, 'submitHos']);
 		
 		
 		
-		Route::get('/addbranch/{id}', [HospitalController::class, 'addbranch']);
-		Route::post('/submitBranch', [HospitalController::class, 'submitBranch']);
+		//Route::get('/addbranch/{id}', [HospitalController::class, 'addbranch']);
+		//Route::post('/submitBranch', [HospitalController::class, 'submitBranch']);
 		
 		
 		Route::get('/qualificationList', [ConfigurationController::class, 'qualificationList']);
