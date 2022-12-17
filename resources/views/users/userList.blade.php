@@ -12,51 +12,37 @@
                           
                            <div class="table-responsive">
                               <table id="datatable" class="table table-striped table-bordered">
-                                 <thead>
+                                <thead>
                                     <tr>
+                                       <th>Id</th>
                                        <th>User Name</th>
-                                       <th>Category</th>
+                                       <th>Role</th>
                                        <th>Contact Number</th>
                                        <th>Email Address</th>
-                                       <th>Last Seen</th>
                                        <th>Action</th>
                                     </tr>
-                                 </thead>
+                                </thead>
+								
                                  <tbody>
+									@foreach($user as $user_data)
                                     <tr>
-                                       <td>Siva </td>
-                                       <td>Doctor</td>
-                                       <td>89787820</td>
-                                       <td>siva@gmail.com</td>
-                                       <td>2011/04/25</td>
-                                       <td class="center">
+										<td>{{$user_data->id}}</td>
+										<td>{{$user_data->user_name}}</td>
+										<td>{{$user_data->user_role}}</td>
+										<td>{{$user_data->user_phone}}</td>
+										<td>{{$user_data->user_email}}</td>
+										<td class="center">
                                             <div class="btn-toolbar row-action">
-                                                <div class="btn-group">
-                                                <a class="btn btn-success"  data-bs-toggle="modal" id="">View</button>
-                                                <a class="btn btn-info"  data-bs-toggle="modal" id="">Edit</button>
-                                                
+                                                <div class="btn-group">                                    
+                                                <a class="btn btn-success" data-bs-toggle="modal" id="">View</button>
+                                                <a class="btn btn-info" data-bs-toggle="modal" id="">Edit</button>
                                                 <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Fees?');" title="Delete">De Activate</a>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                       <td>Rajesh </td>
-                                       <td>Admin</td>
-                                       <td>89787820</td>
-                                       <td>rej@gmail.com</td>
-                                       <td>2011/04/25</td>
-                                       <td class="center">
-                                            <div class="btn-toolbar row-action">
-                                                <div class="btn-group">
-                                                <a class="btn btn-success"  data-bs-toggle="modal" id="">View</button>
-                                                <a class="btn btn-info"  data-bs-toggle="modal" id="">Edit</button>
-                                                
-                                                <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Fees?');" title="Delete">De Activate</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+									@endforeach
+                                     </tbody>
                                     
                               </table>
                            </div>

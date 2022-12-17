@@ -101,7 +101,11 @@ class ConfigurationController extends Controller
 					$specialization=Specialization::get();
 					return view('configuration/Specialization/specializationList')->with('specialization',$specialization);
 				}
-				
+				public function specializationapi() 
+				{
+					$data=Specialization::get();
+					return response()->json(['data'=>$data]);
+				}
 				public function addSpecialization() 
 				{
 					return view('configuration/Specialization/addSpecialization');
@@ -249,7 +253,11 @@ class ConfigurationController extends Controller
 					$category=Category::get();
 					return view('configuration/Category/categoryList')->with('category',$category);
 				}
-				
+				public function categoryapi() 
+				{
+					$data=Category::get();
+					return response()->json(['data'=>$data]);
+				}
 				public function addCategory() 
 				{
 					return view('configuration/Category/addCategory');

@@ -6,6 +6,7 @@ use App\Models\Branch;
 use App\Models\Hos;
 use App\Models\City;
 use App\Models\District;
+use App\Models\Doctor;
 use App\Models\HospitalCategory;
 use Illuminate\Http\Request;
 
@@ -39,11 +40,12 @@ class HospitalController extends Controller
   
     public function addHospital() {
        $hos=Hos::get();
-       $branch=Branch::get();
+       //$branch=Branch::get();
        $city=City::get();
        $district=District::get();
        $hospital_category=HospitalCategory::get();
-        return view('hospital/addHospital')->with('hos',$hos)->with('branch',$branch)->with('city',$city)->with('district',$district)->with('hospital_category',$hospital_category);
+	  
+        return view('hospital/addHospital')->with('hos',$hos)->with('city',$city)->with('district',$district)->with('hospital_category',$hospital_category);
     }
     public function submitHos(Request $request) {
 					$input=$request->all();
@@ -89,7 +91,27 @@ class HospitalController extends Controller
 
 
 				}
-				
+public function submitDoctor(Request $request) {
+	$input=$request->all();
+$ins=[
+	'doctor_name'=>$input['doctor_name'],
+	'doctor_education'=>$input['doctor_education'],
+	'created_at'=> date("Y-m-d H:i:s")
+];
+Doctor::insert($ins);
+return response()->json(['success'=>'data updated']);
+}	
+public function deleteDoctor($ID) {
+	
+
+Doctor::where('id',$ID)->delete();
+return response()->json(['success'=>'data updated']);
+}
+public function getDoctor(Request $request) {
+
+$data=Doctor::get();
+return response()->json($data);
+}	
    
     public function addbranch($ID) {
 				 $branch=Branch::where('id',$ID)->get();

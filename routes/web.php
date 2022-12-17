@@ -33,7 +33,7 @@ use App\Http\Controllers\ConfigurationController;
         Route::get('dashboard',[UserController::class, 'dashboard']);
         Route::get('userList',[UserController::class, 'userList']);
         Route::get('addUser',[UserController::class, 'addUser']);
-
+		Route::post('submitUser',[UserController::class, 'submitUser']);
 
         Route::get('hospitalDashboard',[HospitalController::class, 'hospitalDashboard']);
         Route::get('hospitalList',[HospitalController::class, 'hospitalList']);
@@ -42,8 +42,9 @@ use App\Http\Controllers\ConfigurationController;
         Route::get('addHospital',[HospitalController::class, 'addHospital']);
 		Route::post('/submitHos', [HospitalController::class, 'submitHos']);
 		
-		
-		
+		Route::post('/submitDoctor', [HospitalController::class, 'submitDoctor']);
+		Route::get('/getDoctor', [HospitalController::class, 'getDoctor']);
+		Route::get('/deleteDoctor/{id}', [HospitalController::class, 'deleteDoctor']);
 		//Route::get('/addbranch/{id}', [HospitalController::class, 'addbranch']);
 		//Route::post('/submitBranch', [HospitalController::class, 'submitBranch']);
 		

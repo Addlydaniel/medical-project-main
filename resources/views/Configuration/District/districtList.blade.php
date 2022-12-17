@@ -12,9 +12,6 @@
             <div class="col-10">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                     <h4 class="mb-sm-0 font-size-18">District</h4>
-
-                  
-
                 </div>
               </div>
               <div class="col-2">
