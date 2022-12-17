@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Doctor;
 use Illuminate\Http\Request;
 use Session;
 use Carbon;
@@ -68,11 +69,12 @@ class UserController extends Controller
 			//'user_role'=>$user_role,
 			'created_at'=> date("Y-m-d H:i:s")
 			]);
+			
 			if($input['user_role']==2){
 				Doctor::insert([
 					'doctor_name'=>$user_name,
-					'doctor_phone'=>$user_phone,
-					'doctor_email'=>$user_email,
+					
+					'doctor_mail'=>$user_email,
 					'doctor_category'=>$input['visiting_time'],
 					
 					'created_at'=> date("Y-m-d H:i:s")
