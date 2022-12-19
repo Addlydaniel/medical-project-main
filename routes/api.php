@@ -19,3 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/qualificationapi', [ConfigurationController::class, 'qualificationapi']);
+Route::get('/specializationapi', [ConfigurationController::class, 'specializationapi']);
+Route::get('/categoryapi', [ConfigurationController::class, 'categoryapi']);

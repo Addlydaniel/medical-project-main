@@ -12,9 +12,6 @@
             <div class="col-10">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                     <h4 class="mb-sm-0 font-size-18">District</h4>
-
-                  
-
                 </div>
               </div>
               <div class="col-2">
@@ -91,4 +88,3 @@
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 @endsection
-
