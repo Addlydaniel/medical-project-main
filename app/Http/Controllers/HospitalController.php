@@ -117,8 +117,9 @@ class HospitalController extends Controller
 	   
 		
 	public function addBranch() {
-       
-        return view('hospital/addBranch');
+		
+        $district=District::get();
+        return view('hospital/addBranch')->with('district',$district);
     }
   
 	public function submitBranch(Request $request) {
@@ -175,6 +176,7 @@ class HospitalController extends Controller
 
 
 					// }
-		
+
+	
 		
 }

@@ -127,16 +127,29 @@
 				<label for="lname">Address Line 2</label>
 				<input type="text" class="form-control" id="address_line2" name="address_line2" value="{{old('address_line2')}}" placeholder="Address Line 2">
 			</div>
-			<div class="form-group col-md-4">
-			  <label for="lname">District</label>
-			  <input type="text" class="form-control" id="branch_district" name="branch_district" value="{{old('branch_district')}}" placeholder="District">
-			</div>
+		
+			 <div class="form-group col-md-4">
+                        <label for="add2">District</label>
+                        <select class="form-control"  name="branch_district" id="branch_district" required="">
+                              <option value="0" selected>Choose...</option>
+                              @foreach($district as $district_data)
+                              <option  value="{{$district_data->id}}">{{$district_data->district_name}}</option>
+                              @endforeach
+                        </select>
+                    </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-4">
-            <label for="lname">City</label>
-                <input type="text" class="form-control" id="branch_city" name="branch_city" value="{{old('branch_city')}}" placeholder="City">
-          </div>
+            
+		  <div class="form-group col-md-4">
+                          <label for="add2">city</label>
+
+                            <select class="form-control"  name="branch_city" id="branch_city" required="">
+                            <option value="0" selected>Choose...</option>
+                            @foreach($city as $city_data)
+                            <option  value="{{$city_data->id}}">{{$city_data->city_name}}</option>
+                            @endforeach
+                            </select>
+                      </div>
             <div class="form-group col-md-4">
               <label for="lname">State</label>
               <input type="text" class="form-control" id="State" name="branch_state" value="{{old('branch_state')}}" placeholder="State">
