@@ -32,6 +32,7 @@ use App\Http\Controllers\ConfigurationController;
         Route::get('forgotPassword',[UserController::class, 'forgotPassword']);
         Route::get('dashboard',[UserController::class, 'dashboard']);
         Route::get('userList',[UserController::class, 'userList']);
+        Route::get('show',[UserController::class, 'show']);
         Route::get('addUser',[UserController::class, 'addUser']);
 		Route::post('submitUser',[UserController::class, 'submitUser']);
 

@@ -28,7 +28,9 @@
                                     <tr>
 										<td>{{$user_data->id}}</td>
 										<td>{{$user_data->user_name}}</td>
-										<td>{{$user_data->user_role}}</td>
+										<td>@if($user_data->user_role==1)Admin 
+										@elseif($user_data->user_role==2)Doctor
+										@elseif($user_data->user_role==3)Patient @endif</td>
 										<td>{{$user_data->user_phone}}</td>
 										<td>{{$user_data->user_email}}</td>
 										<td class="center">
@@ -51,4 +53,18 @@
                   </div>
                </div>
             </div>
+			<script>
+               $('#selectuserrole').on('change', function() {
+                  if(this.value==2){
+					  
+                    
+                     $("#doctor").show();
+                  }
+                  else(this.value==3){
+                     
+                     $("#patient").show();
+                  
+  
+});
+</script>
             @endsection

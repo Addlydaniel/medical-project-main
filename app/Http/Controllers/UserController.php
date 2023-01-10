@@ -17,16 +17,19 @@ class UserController extends Controller
      }
      public function forgotPassword() {
        
-        return view('authentication/forgot_password');
+        return view('authentication/forgot_password')->get();
     }
     public function dashboard() {
        
         return view('/dashboard');
     }
+	
     
 	public function userList() 
 				{
 					$user=User::get();
+					//dd($user);
+					//$user=User::where(['user.is_delete',0])->select('role.id as RoleID','role.Role_name')->join('role', 'role.id', '=', 'user.user_role')->get();					
 					return view('users/userList')->with('user',$user);
 				}
     
@@ -58,32 +61,34 @@ class UserController extends Controller
 
 		}
 		else{
+			$user_role=$input['user_role'];
 			$user_name=$input['user_name'];
 			$user_phone=$input['user_phone'];
 			$user_email=$input['user_email'];
 			$user_address=$input['user_address'];
-			User::insertGetId([
+			$user_id=User::insertGetId([
+			'user_role'=>$user_role,
 			'user_name'=>$user_name,
 			'user_phone'=>$user_phone,
 			'user_email'=>$user_email,
+			'user_address'=>$user_address,
 			//'user_role'=>$user_role,
 			'created_at'=> date("Y-m-d H:i:s")
 			]);
 			
 			if($input['user_role']==2){
 				Doctor::insert([
-					'doctor_name'=>$user_name,
-					
-					'doctor_mail'=>$user_email,
-					'doctor_category'=>$input['visiting_time'],
-					
+				'user_id'=>$user_id,
+					'doctor_name'=>$doctor_name,					
+					'doctor_mail'=>$doctor_mail,
+					'doctor_category'=>$doctor_category,					
 					'created_at'=> date("Y-m-d H:i:s")
 					]);
 			}
 			if($input['user_role']==3){
 				Patient::insert([
-					'patient_name'=>$user_name,
-					
+				'user_id'=>$user_id,
+					'patient_name'=>$user_name,					
 					'created_at'=> date("Y-m-d H:i:s")
 					]);
 			}

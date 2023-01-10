@@ -37,17 +37,17 @@
                            <div class="about-info m-0 p-0">
                               <div class="row">
                                  <div class="col-4">Name:</div>
-                                 <div class="col-8">Doctor</div>
+                                 <div class="col-8">{{$doctor->doctor_name}}</div>
                                  <div class="col-4">Education:</div>
-                                 <div class="col-8">dfgh</div>
+                                 <div class="col-8">{{$doctor->doctor_education}}</div>
                                  <div class="col-4">Qualification:</div>
-                                 <div class="col-8">dfg</div>
+                                 <div class="col-8">{{$doctor->doctor_qualification}}</div>
                                  <div class="col-4">Address:</div>
-                                 <div class="col-8">dfsg</div>
+                                 <div class="col-8">{{$doctor->doctor_address}}</div>
                                  <div class="col-4">Category:</div>
-                                 <div class="col-8">dfg</div>
+                                 <div class="col-8">{{$doctor->doctor_category}}</div>
                                  <div class="col-4">Schedule:</div>
-                                 <div class="col-8">dfhg</div>
+                                 <div class="col-8">{{$doctor->doctor_schedule}}</div>
                               </div>
                            </div>
                         </div>

@@ -64,29 +64,21 @@
                        
                      </li>
                      <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Hospital</span></li>
-                    
-                     <li>
+                    <li><a href="{{url('hospitalDashboard')}}" class="iq-waves-effect"><i class="ion-broken"></i><span>Hospital Dashboard</span></a></li>
+                    <li><a href="{{url('hospitalList')}}" class="iq-waves-effect"><i class="ion-heart"></i><span>All Hospital</span></a></li>
+                    <li><a href="{{url('doctorList')}}" class="iq-waves-effect"><i class="ion-heart"></i><span>Doctors</span></a></li>
+                    <li><a href="{{url('tokenList')}}" class="iq-waves-effect"><i class="ion-heart"></i><span>Token</span></a></li>
+                     
+                    <!-- <li>
                         <a href="{{url('hospitalDashboard')}}" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-home-4-fill"></i><span>Hospital Dashboard</span></a>
                        
                      </li>
-                    <!-- <li>
+                     <li>
                         <a href="{{url('addHospital')}}" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-chat-4-fill"></i><span>Add Hospital</span></a>
                        
                      </li>-->
 
-                     <li>
-                        <a href="{{url('hospitalList')}}" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-briefcase-4-fill"></i><span>All Hospital</span></a>
-                       
-                     </li>
-                     <li>
-                        <a href="{{url('doctorList')}}" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-user-3-fill"></i><span>Doctors</span></a>
-                       
-                     </li>
-                     <li>
-                        <a href="{{url('tokenList')}}" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-user-3-fill"></i><span>Token</span></a>
-                       
-                     </li>
-                    
+                     
                     
                      
                      <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Reports</span></li>

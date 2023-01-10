@@ -129,6 +129,7 @@
             <script>
                $('#selectuserrole').on('change', function() {
                   if(this.value==2){
+					  
                      $("#patient").hide();
                      $("#doctor").show();
                   }
@@ -140,6 +141,7 @@
                      $("#patient").hide();
                      $("#doctor").hide();
                   }
+				  
   
 });
 </script>

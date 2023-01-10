@@ -19,20 +19,29 @@
                     <div class="row">
                       <div class="form-group col-md-4">
                           <label for="fname">Hospital Name</label>
-                          <input type="text" class="form-control" id="fname"  name="hos_name" value="{{old('hos_name')}}" placeholder="Hospital Name">
+                          <input type="text" class="form-control" id="fname"  name="hos_name" value="{{old('hos_name')}}" placeholder="Hospital Name" required="">
                       </div>
                       <div class="form-group col-md-4">
                           <label for="lname">Phone</label>
-                          <input type="text" class="form-control" id="lname" name="hos_phone" value="{{old('hos_phone')}}" placeholder="phone">
+                          <input type="text" class="form-control" id="lname" name="hos_phone" value="{{old('hos_phone')}}" placeholder="Phone" required="">
                       </div>
                       <div class="form-group col-md-4">
                           <label for="add1">Mail</label>
-                          <input type="mail" class="form-control" id="add1" name="hos_mail" value="{{old('hos_mail')}}" placeholder="example@gmail.com">
+                          <input type="mail" class="form-control" id="add1" name="hos_mail" value="{{old('hos_mail')}}" placeholder="example@gmail.com" required="">
                       </div>
                       
-                      
                       <div class="form-group col-md-4">
-                          <label for="add2">Hospital city</label>
+                        <label for="add2">District</label>
+                        <select class="form-control"  name="hos_district" id="hos_district" required="">
+                              <option value="0" selected>Choose...</option>
+                              @foreach($district as $district_data)
+                              <option  value="{{$district_data->id}}">{{$district_data->district_name}}</option>
+                              @endforeach
+                        </select>
+                    </div>
+    
+                      <div class="form-group col-md-4">
+                          <label for="add2">City</label>
 
                             <select class="form-control"  name="hos_city" id="hos_city" required="">
                             <option value="0" selected>Choose...</option>
@@ -42,38 +51,29 @@
                             </select>
                       </div>
                       <div class="form-group col-md-4">
-                          <label for="add2">Hospital Street</label>
-                          <input type="text" class="form-control" id="add2" name="hos_street" value="{{old('hos_street')}}" placeholder="  Street ">
+                          <label for="add2">Street</label>
+                          <input type="text" class="form-control" id="add2" name="hos_street" value="{{old('hos_street')}}" placeholder="Street" required="">
                       </div>
+                    
                     <div class="form-group col-md-4">
-                        <label for="add2">Hospital District</label>
-                        <select class="form-control"  name="hos_district" id="hos_district" required="">
-                              <option value="0" selected>Choose...</option>
-                              @foreach($district as $district_data)
-                              <option  value="{{$district_data->id}}">{{$district_data->district_name}}</option>
-                              @endforeach
-                        </select>
-                    </div>
-    
-                    <div class="form-group col-md-4">
-                          <label for="add2">Hospital pincode</label>
-                          <input type="text" class="form-control" id="add2" name="hos_pincode" value="{{old('hos_pincode')}}" placeholder="pincode ">
+                          <label for="add2">Pincode</label>
+                          <input type="text" class="form-control" id="add2" name="hos_pincode" value="{{old('hos_pincode')}}" placeholder="Pincode" required="">
                       </div>
                       <div class="form-group col-md-4">
                           <label for="lname">Emergency Contact</label>
-                          <input type="text" class="form-control" id="lname" name="hos_emergency_contact" value="{{old('hos_emergency_contact')}}" placeholder="Contact">
+                          <input type="text" class="form-control" id="lname" name="hos_emergency_contact" value="{{old('hos_emergency_contact')}}" placeholder="Emergency Contact" required="">
                       </div>
                     <div class="form-group col-md-4">
                           <label for="lname">Registration Date</label>
-                          <input type="date"class="form-control" id="lname" name="hos_reg_date" value="{{old('hos_reg_date')}}" placeholder="Date">
+                          <input type="date" class="form-control" id="lname" name="hos_reg_date" value="{{old('hos_reg_date')}}" placeholder="Registration Date" required="">
                       </div>
                     <div class="form-group col-md-4">
                         <label for="lname">Registration time</label>
-                        <input type="time" class="form-control" id="lname" name="hos_reg_time" value="{{old('hos_reg_time')}}" placeholder="time">
+                        <input type="time" class="form-control" id="lname" name="hos_reg_time" value="{{old('hos_reg_time')}}" placeholder="Registration time" required="">
                     </div>
                     <div class="form-group col-md-4">
                       <label for="lname">Registration Location</label>
-                      <input type="text" class="form-control" id="lname" name="hos_location" value="{{old('hos_location')}}" placeholder="Location">
+                      <input type="text" class="form-control" id="lname" name="hos_location" value="{{old('hos_location')}}" placeholder="Registration Location" required="">
                     </div>
     
                     <div class="form-group col-md-4">
@@ -88,7 +88,7 @@
                     </div>
                     
                       </div>
-                      <button type="button" class="myModal1_btn btn btn-primary" data-toggle="modal1" data-target="#exampleModal">
+                      <button type="button" class="myModal_btn1 btn btn-primary" data-toggle="modal1" data-target="#exampleModal">
                       Add Branch
                       </button>
                       <button type="button" class="myModal_btn btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
@@ -127,37 +127,37 @@
 				<label for="lname">Address Line 2</label>
 				<input type="text" class="form-control" id="address_line2" name="address_line2" value="{{old('address_line2')}}" placeholder="Address Line 2">
 			</div>
-		
-			 <div class="form-group col-md-4">
+		<div class="form-group col-md-4">
+              <label for="lname">State</label>
+              <input type="text" class="form-control" id="branch_state" name="branch_state" value="{{old('branch_state')}}" placeholder="State">
+          </div>
+			
+        </div>
+        <div class="row">
+             <div class="form-group col-md-4">
                         <label for="add2">District</label>
                         <select class="form-control"  name="branch_district" id="branch_district" required="">
                               <option value="0" selected>Choose...</option>
                               @foreach($district as $district_data)
-                              <option  value="{{$district_data->id}}">{{$district_data->district_name}}</option>
+                              <option  value="{{$district_data->district_name}}">{{$district_data->district_name}}</option>
                               @endforeach
                         </select>
                     </div>
-        </div>
-        <div class="row">
-            
 		  <div class="form-group col-md-4">
                           <label for="add2">city</label>
 
                             <select class="form-control"  name="branch_city" id="branch_city" required="">
                             <option value="0" selected>Choose...</option>
                             @foreach($city as $city_data)
-                            <option  value="{{$city_data->id}}">{{$city_data->city_name}}</option>
+                            <option  value="{{$city_data->city_name}}">{{$city_data->city_name}}</option>
                             @endforeach
                             </select>
                       </div>
-            <div class="form-group col-md-4">
-              <label for="lname">State</label>
-              <input type="text" class="form-control" id="State" name="branch_state" value="{{old('branch_state')}}" placeholder="State">
-          </div>
+            
         </div>
 		 <div class="modal-footer">
                   
-                  <button type="button" class="btn btn-primary"  onclick="submit_branch()">Save changes</button>
+                  <button type="button" class="btn btn-primary" onclick="submit_branch()">Save changes</button>
               </form>
        
 		  <table class="table table-bordered dt-responsive" >
@@ -165,6 +165,9 @@
 				<tr>
 				<th>Address Line 1</th>
 				<th>Address Line 2</th>
+				<th>District</th>
+				<th>City</th>
+				<th>State</th>
 					<th>Action</th>
 				   
 				</tr>
@@ -200,7 +203,7 @@
                       </div>
                         <div class="form-group col-md-4">
                                 <label for="lname">Mail ID</label>
-                                <input type="text" class="form-control" id="doctor_mail" name="doctor_mail" placeholder="Mail ID">
+                                <input type="mail" class="form-control" id="doctor_mail" name="doctor_mail" placeholder="Mail ID">
                         </div>
                         <div class="form-group col-md-4">
                                 <label for="lname">Education</label>
@@ -208,23 +211,35 @@
                         </div>
                 </div>
                 <div class="row">
-                      <div class="form-group col-md-4">
-                                <label for="lname">Qualification</label>
-                                <input type="text" class="form-control" id="doctor_qualification" name="doctor_qualification"  placeholder="Qualification">
-                      </div>
+                      
+					   <div class="form-group col-md-4">
+                        <label for="add2">Qualification</label>
+                        <select class="form-control"  name="doctor_qualification" id="doctor_qualification" required="">
+                              <option value="0" selected>Choose...</option>
+                              @foreach($qualification as $qualification_data)
+                              <option  value="{{$qualification_data->id}}">{{$qualification_data->qualification_name}}</option>
+                              @endforeach
+                        </select>
+                    </div>
                         <div class="form-group col-md-4">
                                 <label for="lname">Address</label>
                                 <input type="text" class="form-control" id="doctor_address" name="doctor_address" placeholder="Address">
                         </div>
-                        <div class="form-group col-md-4">
-                              <label for="lname">Category</label>
-                              <input type="text" class="form-control" id="doctor_category" name="doctor_category" placeholder="Category">
-                        </div>
+                        
+						  <div class="form-group col-md-4">
+                        <label for="add2">Category</label>
+                        <select class="form-control"  name="doctor_category" id="doctor_category" required="">
+                              <option value="0" selected>Choose...</option>
+                              @foreach($category as $category_data)
+                              <option  value="{{$category_data->id}}">{{$category_data->category_name}}</option>
+                              @endforeach
+                        </select>
+                    </div>
                 </div>
                 <div class="row">
                       <div class="form-group col-md-6">
                           <label for="lname">Schedule</label>
-                          <input type="date" class="form-control" id="doctor_schedule" name="doctor_schedule" placeholder="Schedule">
+                          <input type="datetime-local" class="form-control" id="doctor_schedule" name="doctor_schedule" placeholder="Schedule">
                       </div>
                 </div>
                 </div>
@@ -262,10 +277,10 @@ $('#exampleModal').trigger('focus')
 </script>
 <script type="text/javascript">
       $(document).ready(function(){
-       $('.myModal1_btn').click(function(e){
+       $('.myModal_btn1').click(function(e){
        
            e.preventDefault();
-           getDoctor();
+           getBranch();
          
            $('#myModal1').modal('show');
        })
@@ -286,6 +301,9 @@ function submit_branch(){
   var formData = new FormData(form);
   let address_line1 = $('#address_line1').val();
   let address_line2 = $('#address_line2').val();
+  let branch_district = $('#branch_district').val();
+  let branch_city = $('#branch_city').val();
+  let branch_state = $('#branch_state').val();
   $.ajax({
   type : 'POST',
   url  : '{{url("/submitBranch")}}',
@@ -293,6 +311,9 @@ function submit_branch(){
       "_token": "{{ csrf_token() }}",
       address_line1:address_line1,
       address_line2:address_line2,
+      branch_district:branch_district,
+      branch_city:branch_city,
+      branch_state:branch_state,
    
     },
     success:function(data){
@@ -307,6 +328,11 @@ function table_data_rows(data) {
     $.each( data, function( key, value ) {
         rows = rows + '<tr>';
         rows = rows + '<td>'+value.address_line1+'</td>';
+        rows = rows + '<td>'+value.address_line2+'</td>';
+        rows = rows + '<td>'+value.branch_district+'</td>';
+        rows = rows + '<td>'+value.branch_city+'</td>';
+        rows = rows + '<td>'+value.branch_state+'</td>';
+       
        
       
       
